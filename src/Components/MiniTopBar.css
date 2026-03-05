@@ -1,0 +1,64 @@
+@media (max-width: 600px) {
+  .btn-line {
+    flex-direction: column;
+    height: auto;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+.btn-line {
+  display: flex;
+  gap: 0px;
+  width: auto;
+  height: 36px;
+  background-color: rgb(15 15 15);
+  align-items: center;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.portion {
+  width: 100px;
+  height: 37px;
+  padding: 1px 3px;
+  cursor: pointer;
+  font-size: 17px;
+
+  margin-left: -5px;
+  font-family: "Times New Roman, serif";
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  position: relative;
+
+  letter-spacing: normal;
+  text-align: center;
+}
+
+.portion.active {
+  background-color: rgb(75 60 20);
+  color: rgb(218 165 32);
+  font-weight: bold;
+}
+
+.portion.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  height: 3px;
+  background-color: rgb(218 165 32);
+  border-radius: 2px;
+}
+.divider {
+  margin: 0 0px;
+  color: #aaa;
+  user-select: none;
+}
