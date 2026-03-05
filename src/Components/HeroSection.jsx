@@ -93,7 +93,7 @@ function FoodCarousel() {
       {/* Background Image - Blurred */}
       <Box
         component="img"
-        src="src/assets/food.avif"
+        src="/image/food.avif" // ✅ public ke andar se direct path
         alt="Food Background"
         sx={{
           position: "absolute",
