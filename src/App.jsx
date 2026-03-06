@@ -63,6 +63,7 @@ import { Box, Divider } from "@mui/material";
 import NavBar from "./Components/NavBar";
 import TopBar from "./Components/TopBar";
 import Footer from "../src/Components/Footer";
+import DeliveryScreen from "./Screens/DeliveryScreen";
 
 function App() {
   return (
@@ -97,6 +98,7 @@ function App() {
             <Route path="/" element={<HomeScreen />} />
             <Route path="/MenuScreen" element={<MenuScreen />} />
             <Route path="/ContactScreen" element={<ContactScreen />} />
+            <Route path="/DeliveryScreen" element={<DeliveryScreen />} />
           </Routes>
         </Box>
 

@@ -90,10 +90,10 @@ function FoodCarousel() {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Background Image - Blurred */}
+      
       <Box
         component="img"
-        src="/image/food.avif" // ✅ public ke andar se direct path
+        src="/image/food.avif" 
         alt="Food Background"
         sx={{
           position: "absolute",

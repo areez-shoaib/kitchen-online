@@ -74,14 +74,16 @@ export default function TopBar() {
               px: 1,
               py: 0.5,
               gap: 1,
-              textTransform: "none",
+              pointerEvents: "none",
+
               animation: "glow 2s infinite alternate",
+              textTransform: "none",
               "@keyframes glow": {
                 "0%": {
                   boxShadow: "0 0 5px rgba(255, 193, 7, 0.3)",
                 },
                 "50%": {
-                  transform: "translateY(-3px)",
+                  transform: "translateY(-4px)",
                   boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
                 },
                 "100%": {
@@ -100,6 +102,8 @@ export default function TopBar() {
           variant="contained"
           sx={{
             color: "black",
+            outline: "none", // focus outline remove
+          
             background:
               "linear-gradient(45deg, rgb(225 160 25),rgb(246 146 8))",
             fontWeight: 900,
@@ -108,6 +112,14 @@ export default function TopBar() {
             borderRadius: { lg: "13px", xs: "2px" },
             px: { lg: 3, xs: 0.2 },
             py: { xs: 0.1, lg: 0.8 },
+            "&:focus": {
+              outline: "none",
+         
+            },
+            "&:active": {
+              outline: "none",
+        
+            },
           }}
         >
           Order Now

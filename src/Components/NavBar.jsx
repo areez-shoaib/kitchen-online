@@ -1,7 +1,8 @@
-import Buttons from "../Components/Buttons";
 import { Box, Typography, Button, Drawer, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
+import NavBarButtons from "../Components/Buttons/NavBarButtons";
+import { Link } from "react-router-dom";
 export default function NavBar() {
   const [open, setOpen] = useState(false);
   return (
@@ -23,6 +24,8 @@ export default function NavBar() {
         {/* Logo */}
         <Box>
           <Typography
+            component={Link}
+            to="/"
             sx={{
               fontSize: { lg: "26px", xs: "17px" },
               fontFamily: "Times New Roman, serif",
@@ -33,6 +36,14 @@ export default function NavBar() {
               WebkitTextFillColor: "transparent",
               textAlign: { xs: "center", sm: "left" },
               ml: { lg: 27 },
+              textDecoration: "none",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+
+              "&:hover": {
+                transform: "scale(1.08) translateY(-20px)",
+                filter: "brightness(1.2)",
+              },
             }}
           >
             Kitchen Online
@@ -50,7 +61,7 @@ export default function NavBar() {
             justifyContent: "center",
           }}
         >
-          <Buttons />
+          <NavBarButtons />
         </Box>
 
         <Box sx={{ mt: { xs: 0, sm: 0 } }}>
@@ -67,6 +78,13 @@ export default function NavBar() {
               px: { xs: 2, sm: 3 },
               py: { xs: 0.5, sm: 0.5 },
               mr: { lg: 27 },
+              outline: "none",
+              "&:focus": {
+                outline: "none",
+              },
+              "&:active": {
+                outline: "none",
+              },
             }}
           >
             Register
@@ -94,7 +112,7 @@ export default function NavBar() {
             gap: 2,
           }}
         >
-          <Buttons />
+          <NavBarButtons />
 
           <Button
             sx={{
