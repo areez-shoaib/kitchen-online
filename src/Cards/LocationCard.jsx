@@ -32,7 +32,7 @@ export default function LocationCard() {
           gap: 3,
         }}
       >
-        {/* MAP */}
+        
         <Box sx={{ width: "100%", height: "500px" }}>
           <iframe
             src="https://www.google.com/maps?q=Dera%20Ghazi%20Khan&output=embed"

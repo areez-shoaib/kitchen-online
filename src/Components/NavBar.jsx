@@ -3,8 +3,16 @@ import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import NavBarButtons from "../Components/Buttons/NavBarButtons";
 import { Link } from "react-router-dom";
+import UserLogin from "../Modals/UserLogin";
 export default function NavBar() {
+  const [isopen, setisopen] = useState(false);
   const [open, setOpen] = useState(false);
+  const LoginModalOpen = () => {
+    setisopen(true);
+  };
+  const LoginModalClose = () => {
+    setisopen(false);
+  };
   return (
     <>
       <Box
@@ -68,6 +76,7 @@ export default function NavBar() {
           {" "}
           {/* mobile me thoda margin top */}
           <Button
+            onClick={LoginModalOpen}
             sx={{
               color: "black",
               background:
@@ -89,6 +98,7 @@ export default function NavBar() {
           >
             Register
           </Button>
+          {isopen && <UserLogin />}
         </Box>
         <IconButton
           sx={{

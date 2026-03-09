@@ -64,10 +64,14 @@ import NavBar from "./Components/NavBar";
 import TopBar from "./Components/TopBar";
 import Footer from "../src/Components/Footer";
 import DeliveryScreen from "./Screens/DeliveryScreen";
+import UserLogin from "./Modals/UserLogin";
+import ForgotPassword from "./Modals/ForgotPassword";
 
 function App() {
   return (
     <BrowserRouter>
+      {/* <UserLogin /> */}
+      {/* <ForgotPassword /> */}
       <Box
         sx={{
           backgroundColor: "rgb(15 15 15)",
@@ -79,7 +83,6 @@ function App() {
           overflowX: "hidden",
         }}
       >
-        {/* Header + NavBar */}
         <TopBar />
 
         <Divider
@@ -92,7 +95,6 @@ function App() {
           sx={{ borderColor: "rgb(75 60 20)", borderBottomWidth: "1px" }}
         />
 
-        {/* Main Content */}
         <Box sx={{}}>
           <Routes>
             <Route path="/" element={<HomeScreen />} />
@@ -110,7 +112,6 @@ function App() {
           }}
         />
 
-        {/* Footer */}
         <Footer />
       </Box>
     </BrowserRouter>
