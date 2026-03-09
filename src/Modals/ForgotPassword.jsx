@@ -46,8 +46,8 @@ export default function ForgotPassword() {
       >
         <Box
           sx={{
-            width: "21%",
-            height: "68%",
+            width: { lg: "21%", xs: "auto" },
+            height: { lg: "68%", xs: "auto" },
             bgcolor: "rgb(34 34 34)",
             borderRadius: "20px",
             border: "1px solid rgb(65 54 27)",

@@ -48,7 +48,7 @@ export default function UserLogin() {
       >
         <Box
           sx={{
-            width: "33%",
+            width: { lg: "33%", xs: "auto" },
 
             height: activeTab === "login" ? "530px" : "720px",
             bgcolor: "rgb(34 34 34)",
@@ -552,7 +552,8 @@ export default function UserLogin() {
         <Typography
           sx={{
             color: "rgb(208 208 208)",
-            fontSize: "14px",
+            fontSize: { lg: "14px", xs: "11px" },
+            textAlign: { xs: "center" },
           }}
         >
           By signing up, you agree to our Terms of Service and Privacy Policy
