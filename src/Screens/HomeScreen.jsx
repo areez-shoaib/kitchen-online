@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Grid, Paper, Divider, Typography, Button } from "@mui/material";
-import { glowEffect } from "../Animations/GLowAnimation";
+import { Box } from "@mui/material";
 import MealsCard from "../Cards/MealsCard";
 import Dividers from "../Components/Dividers";
 import StatusSection from "../Sections/StatusSection";
@@ -12,23 +11,7 @@ import ReviewCard from "../Cards/ReviewCard";
 import CustomerCard from "../Cards/CustomerCard";
 import AboutSection from "../Sections/AboutSection";
 import ImageSection from "../Sections/ImageSection";
-const AnimatedBox = ({ children, ...props }) => (
-  <Box
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      border: "2px solid rgb(61 51 26)",
-      borderRadius: "12px",
-      bgcolor: "rgb(26 26 26)",
-      height: "200px",
-      width: "300px",
-      ...glowEffect,
-      ...props.sx,
-    }}
-  >
-    {children}
-  </Box>
-);
+
 export default function HomeScreen() {
   return (
     <>
@@ -36,6 +19,8 @@ export default function HomeScreen() {
         sx={{
           display: "flex",
           flexDirection: "column",
+          minHeight: "100%",
+          width: { lg: "100%", md: "100%" },
         }}
       >
         <ImageSection />

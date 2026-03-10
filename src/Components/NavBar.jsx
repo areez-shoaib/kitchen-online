@@ -4,14 +4,25 @@ import MenuIcon from "@mui/icons-material/Menu";
 import NavBarButtons from "../Components/Buttons/NavBarButtons";
 import { Link } from "react-router-dom";
 import UserLogin from "../Modals/UserLogin";
+import LogoutModal from "../Modals/LogoutModal";
 export default function NavBar() {
   const [isopen, setisopen] = useState(false);
   const [open, setOpen] = useState(false);
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
+  
   const LoginModalOpen = () => {
     setisopen(true);
   };
   const LoginModalClose = () => {
     setisopen(false);
+  };
+  
+  const handleLogoutClick = () => {
+    setLogoutModalOpen(true);
+  };
+  
+  const handleLogoutClose = () => {
+    setLogoutModalOpen(false);
   };
   return (
     <>
@@ -76,7 +87,7 @@ export default function NavBar() {
           {" "}
           {/* mobile me thoda margin top */}
           <Button
-            onClick={LoginModalOpen}
+            onClick={handleLogoutClick}
             sx={{
               color: "black",
               background:
@@ -96,9 +107,10 @@ export default function NavBar() {
               },
             }}
           >
-            Register
+            Logout
           </Button>
           {isopen && <UserLogin />}
+          <LogoutModal open={logoutModalOpen} onClose={handleLogoutClose} />
         </Box>
         <IconButton
           sx={{
@@ -125,6 +137,7 @@ export default function NavBar() {
           <NavBarButtons />
 
           <Button
+            onClick={handleLogoutClick}
             sx={{
               color: "black",
               background:
@@ -135,7 +148,7 @@ export default function NavBar() {
               height: "5%",
             }}
           >
-            Register
+            Logout
           </Button>
         </Box>
       </Drawer>

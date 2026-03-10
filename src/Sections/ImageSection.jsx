@@ -8,7 +8,7 @@ export default function ImageSection() {
     <>
       <Box
         sx={{
-          height: { lg: "480px", xs: "100%" },
+          height: { lg: "auto", xs: "100%" },
           width: "100%",
           position: "relative",
           bgcolor: "pink",
