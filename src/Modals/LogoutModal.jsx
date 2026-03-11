@@ -1,12 +1,16 @@
 import { Box, Typography, Button, Modal } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function LogoutModal({ open, onClose }) {
+export default function LogoutModal({ open, onClose, onLogout }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    onClose();
-    navigate("/UserLogin");
+    if (onLogout) {
+      onLogout();
+    } else {
+      onClose();
+      navigate("/");
+    }
   };
 
   return (

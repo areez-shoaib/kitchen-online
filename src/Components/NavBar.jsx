@@ -2,13 +2,17 @@ import { Box, Typography, Button, Drawer, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import NavBarButtons from "../Components/Buttons/NavBarButtons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserLogin from "../Modals/UserLogin";
 import LogoutModal from "../Modals/LogoutModal";
+import { useAuth } from "../Context/AuthContext";
+
 export default function NavBar() {
   const [isopen, setisopen] = useState(false);
   const [open, setOpen] = useState(false);
   const [logoutModalOpen, setLogoutModalOpen] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
   
   const LoginModalOpen = () => {
     setisopen(true);
@@ -23,6 +27,16 @@ export default function NavBar() {
   
   const handleLogoutClose = () => {
     setLogoutModalOpen(false);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setLogoutModalOpen(false);
+    navigate("/");
+  };
+
+  const handleRegisterClick = () => {
+    navigate("/UserLogin");
   };
   return (
     <>
@@ -87,7 +101,7 @@ export default function NavBar() {
           {" "}
           {/* mobile me thoda margin top */}
           <Button
-            onClick={handleLogoutClick}
+            onClick={isAuthenticated ? handleLogoutClick : handleRegisterClick}
             sx={{
               color: "black",
               background:
@@ -107,10 +121,10 @@ export default function NavBar() {
               },
             }}
           >
-            Logout
+            {isAuthenticated ? "Logout" : "Register"}
           </Button>
           {isopen && <UserLogin />}
-          <LogoutModal open={logoutModalOpen} onClose={handleLogoutClose} />
+          <LogoutModal open={logoutModalOpen} onClose={handleLogoutClose} onLogout={handleLogout} />
         </Box>
         <IconButton
           sx={{
@@ -137,7 +151,7 @@ export default function NavBar() {
           <NavBarButtons />
 
           <Button
-            onClick={handleLogoutClick}
+            onClick={isAuthenticated ? handleLogoutClick : handleRegisterClick}
             sx={{
               color: "black",
               background:
@@ -148,7 +162,7 @@ export default function NavBar() {
               height: "5%",
             }}
           >
-            Logout
+            {isAuthenticated ? "Logout" : "Register"}
           </Button>
         </Box>
       </Drawer>

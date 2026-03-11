@@ -93,6 +93,7 @@ export default function UserLogin() {
             sx={{
               display: "flex",
               flexDirection: "column",
+              height: activeTab === "login" ? "80%" : "85%",
             }}
           >
             <Box
@@ -150,9 +151,30 @@ export default function UserLogin() {
               }}
             />
 
-            {activeTab === "login" && <LoginSection setActiveTab={setActiveTab} />}
+            <Box
+              sx={{
+                overflowY: activeTab === "signup" ? "auto" : "visible",
+                maxHeight: activeTab === "signup" ? "calc(100% - 60px)" : "none",
+                '&::-webkit-scrollbar': {
+                  width: '6px',
+                },
+                '&::-webkit-scrollbar-track': {
+                  background: 'rgb(35 35 35)',
+                  borderRadius: '3px',
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  background: 'rgb(218 165 32)',
+                  borderRadius: '3px',
+                  '&:hover': {
+                    background: 'rgb(244 148 10)',
+                  },
+                },
+              }}
+            >
+              {activeTab === "login" && <LoginSection setActiveTab={setActiveTab} />}
 
-            {activeTab === "signup" && <SignUpSection setActiveTab={setActiveTab} />}
+              {activeTab === "signup" && <SignUpSection setActiveTab={setActiveTab} />}
+            </Box>
           </Box>
         </Box>
         <Typography

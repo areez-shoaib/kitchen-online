@@ -6,8 +6,10 @@ import ContactScreen from "../src/Screens/ContactScreen";
 import DeliveryScreen from "./Screens/DeliveryScreen";
 import UserLogin from "../src/Modals/UserLogin";
 import SplashScreen from "./Screens/SplashScreen";
+import PromoCodeScreen from "./Screens/PromoCodeScreen";
 import CustomerDashboard from "./CustomerPanel/CustomerDashboard";
 import AdminDashboard from "./Adminpanel/AdminDashboard";
+import PromocodeCustomer from "./PromocodeCustomer/PromocodeCustomer";
 import NavBar from "./Components/NavBar";
 import TopBar from "./Components/TopBar";
 import Footer from "../src/Components/Footer";
@@ -17,7 +19,7 @@ import { AuthProvider } from "./Context/AuthContext";
 function Layout({ children }) {
   const location = useLocation();
 
-  const fullscreenRoutes = ["/", "/SplashScreen", "/UserLogin"];
+  const fullscreenRoutes = ["/", "/SplashScreen", "/UserLogin", "/PromoCodeScreen"];
 
   if (fullscreenRoutes.includes(location.pathname)) {
     return <>{children}</>;
@@ -64,7 +66,9 @@ function App() {
             <Route path="/ContactScreen" element={<ContactScreen />} />
             <Route path="/DeliveryScreen" element={<DeliveryScreen />} />
             <Route path="/UserLogin" element={<UserLogin />} />
+            <Route path="/PromoCodeScreen" element={<PromoCodeScreen />} />
             <Route path="/CustomerDashboard" element={<CustomerDashboard />} />
+            <Route path="/PromocodeCustomer" element={<PromocodeCustomer />} />
             <Route path="/AdminDashboard" element={<AdminDashboard />} />
           </Routes>
         </Layout>

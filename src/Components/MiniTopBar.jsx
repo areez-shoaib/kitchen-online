@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import "./MiniTopBar.css"; // yahan aapka .btn-line css file ka path
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
-export default function TopBar() {
+export default function TopBar({ activeCategory = 0, setActiveCategory }) {
   const portions = [
     "ALL",
     "Breakfast",
@@ -12,7 +12,6 @@ export default function TopBar() {
     "Desserts",
     "Bevengers",
   ];
-  const [activePortion, setActivePortion] = useState(0);
 
   return (
     <Box
@@ -54,8 +53,8 @@ export default function TopBar() {
         {portions.map((item, index) => (
           <React.Fragment key={index}>
             <div
-              className={`portion ${activePortion === index ? "active" : ""}`}
-              onClick={() => setActivePortion(index)}
+              className={`portion ${activeCategory === index ? "active" : ""}`}
+              onClick={() => setActiveCategory && setActiveCategory(index)}
             >
               {item}
             </div>

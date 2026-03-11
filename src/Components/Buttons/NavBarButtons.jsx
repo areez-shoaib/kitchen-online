@@ -30,8 +30,19 @@ export default function NavBarButtons() {
         { to: "/HomeScreen", label: "Home" },
         { to: "/MenuScreen", label: "Menu" },
         { to: "/ContactScreen", label: "Contact" },
-        { to: "DeliveryScreen", label: "Delivery Map" },
+        { to: "/DeliveryScreen", label: "Delivery Map" },
         { to: "/AdminDashboard", label: "Dashboard" },
+      ];
+    }
+
+    // Check if user is promo code customer
+    if (user?.isPromoMember) {
+      return [
+        { to: "/HomeScreen", label: "Home" },
+        { to: "/MenuScreen", label: "Menu" },
+        { to: "/ContactScreen", label: "Contact" },
+        { to: "/DeliveryScreen", label: "Delivery Map" },
+        { to: "/PromocodeCustomer", label: "Dashboard" },
       ];
     }
 
@@ -40,7 +51,7 @@ export default function NavBarButtons() {
       { to: "/HomeScreen", label: "Home" },
       { to: "/MenuScreen", label: "Menu" },
       { to: "/ContactScreen", label: "Contact" },
-      { to: "DeliveryScreen", label: "Delivery Map" },
+      { to: "/DeliveryScreen", label: "Delivery Map" },
       { to: "/CustomerDashboard", label: "Dashboard" },
     ];
   };

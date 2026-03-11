@@ -51,12 +51,14 @@ export const AuthProvider = ({ children }) => {
     return { success: false };
   };
 
-  const signup = (userData) => {
+  const signup = (userData, isPromoMember = false, promoCode = '') => {
     // For signup, always create a customer role
     const customerUser = {
       email: userData.email,
       role: 'customer',
-      name: userData.fullName || userData.email.split('@')[0].toUpperCase()
+      name: userData.fullName || userData.email.split('@')[0].toUpperCase(),
+      isPromoMember: isPromoMember,
+      promoCode: promoCode
     };
     setUser(customerUser);
     setIsAuthenticated(true);
