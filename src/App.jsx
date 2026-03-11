@@ -7,7 +7,7 @@ import DeliveryScreen from "./Screens/DeliveryScreen";
 import UserLogin from "../src/Modals/UserLogin";
 import SplashScreen from "./Screens/SplashScreen";
 import CustomerDashboard from "./CustomerPanel/CustomerDashboard";
-import AdminDashboard from "./AdminPanel/AdminDashboard";
+import AdminDashboard from "./Adminpanel/AdminDashboard";
 import NavBar from "./Components/NavBar";
 import TopBar from "./Components/TopBar";
 import Footer from "../src/Components/Footer";
