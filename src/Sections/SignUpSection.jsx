@@ -20,9 +20,12 @@ import PersonIcon from "@mui/icons-material/Person";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
+import WelcomeModal from "../Modals/WelcomeModal";
 
-export default function SignUpSection() {
+export default function SignUpSection({ setActiveTab }) {
   const navigate = useNavigate();
+  const { signup } = useAuth();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -33,6 +36,8 @@ export default function SignUpSection() {
   const [emailError, setEmailError] = useState(false);
   const [strength, setStrength] = useState(0);
   const [showPassword, setShowPassword] = useState(false);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [userName, setUserName] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [confirmStrength, setConfirmStrength] = useState(0);
   
@@ -73,8 +78,20 @@ export default function SignUpSection() {
       return;
     }
     
-    // All validations passed - navigate to home screen
-    navigate("/HomeScreen");
+    // All validations passed - signup and navigate
+    const result = signup(formData);
+    if (result.success) {
+      // Set welcome modal data
+      setUserName(formData.fullName || formData.email.split('@')[0].toUpperCase());
+      setShowWelcomeModal(true);
+      
+      // Navigate after delay
+      setTimeout(() => {
+        navigate('/CustomerDashboard');
+      }, 3000);
+    } else {
+      alert('Signup failed. Please try again.');
+    }
   };
   const checkPasswordStrength = (value) => {
     setFormData(prev => ({ ...prev, password: value }));
@@ -112,6 +129,12 @@ export default function SignUpSection() {
   };
   return (
     <>
+      <WelcomeModal 
+        open={showWelcomeModal}
+        onClose={() => setShowWelcomeModal(false)}
+        userType="customer"
+        userName={userName}
+      />
       <Box
         sx={{
           display: "flex",
@@ -542,6 +565,7 @@ export default function SignUpSection() {
             fontWeight: "bold",
             cursor: "pointer",
           }}
+          onClick={() => setActiveTab && setActiveTab("login")}
         >
           Already have an account? Login
         </Typography>

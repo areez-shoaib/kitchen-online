@@ -1,7 +1,9 @@
 import { Button, Box } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 export default function NavBarButtons() {
+  const { user, isAuthenticated } = useAuth();
   const mainButtons = {
     textTransform: "none",
     fontSize: { xs: "12px", md: "16px" },
@@ -13,6 +15,36 @@ export default function NavBarButtons() {
 
   const location = useLocation();
 
+  const getNavigationItems = () => {
+    if (!isAuthenticated) {
+      return [
+        { to: "/", label: "Home" },
+        { to: "/MenuScreen", label: "Menu" },
+        { to: "/ContactScreen", label: "Contact" },
+        { to: "DeliveryScreen", label: "Delivery Map" },
+      ];
+    }
+
+    if (user?.role === 'admin') {
+      return [
+        { to: "/HomeScreen", label: "Home" },
+        { to: "/MenuScreen", label: "Menu" },
+        { to: "/ContactScreen", label: "Contact" },
+        { to: "DeliveryScreen", label: "Delivery Map" },
+        { to: "/AdminDashboard", label: "Dashboard" },
+      ];
+    }
+
+    // Regular customer
+    return [
+      { to: "/HomeScreen", label: "Home" },
+      { to: "/MenuScreen", label: "Menu" },
+      { to: "/ContactScreen", label: "Contact" },
+      { to: "DeliveryScreen", label: "Delivery Map" },
+      { to: "/CustomerDashboard", label: "Dashboard" },
+    ];
+  };
+
   return (
     <Box
       sx={{
@@ -21,12 +53,7 @@ export default function NavBarButtons() {
         flexDirection: { lg: "row", xs: "column" },
       }}
     >
-      {[
-        { to: "/", label: "Home" },
-        { to: "/MenuScreen", label: "Menu" },
-        { to: "/ContactScreen", label: "Contact" },
-        { to: "DeliveryScreen", label: "Delivery Map" },
-      ].map((btn) => {
+      {getNavigationItems().map((btn) => {
         const isActive = location.pathname === btn.to;
         return (
           <Button

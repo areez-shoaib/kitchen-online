@@ -19,16 +19,61 @@ import { Modal } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import ForgotPassword from "../Modals/ForgotPassword";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
+import WelcomeModal from "../Modals/WelcomeModal";
 
-export default function LoginSection() {
-
+export default function LoginSection({ setActiveTab }) {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [strength, setStrength] = useState(0);
   const [showPassword, setShowPassword] = useState(false);
+  const [openForgotModal, setOpenForgotModal] = useState(false);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [userType, setUserType] = useState('customer');
+  const [userName, setUserName] = useState('');
+  
   const openModal = () => {
-    SetopenForgotModal(true);
+    setOpenForgotModal(true);
+  };
+  
+  const closeModal = () => {
+    setOpenForgotModal(false);
+  };
+  
+  const handleLogin = () => {
+    if (!email.trim() || !password.trim()) {
+      alert('Please fill in all fields');
+      return;
+    }
+    
+    if (emailError) {
+      alert('Please enter a valid email address');
+      return;
+    }
+    
+    const result = login(email, password);
+    if (result.success) {
+      // Set welcome modal data
+      setUserType(result.role);
+      setUserName(result.role === 'admin' ? 'AREEZ KORAI' : email.split('@')[0].toUpperCase());
+      setShowWelcomeModal(true);
+      
+      // Navigate after delay
+      setTimeout(() => {
+        if (result.role === 'admin') {
+          navigate('/AdminDashboard');
+        } else {
+          navigate('/CustomerDashboard');
+        }
+      }, 3000);
+    } else {
+      alert('Invalid credentials');
+    }
   };
   const checkPasswordStrength = (value) => {
     setPassword(value);
@@ -44,17 +89,32 @@ export default function LoginSection() {
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (emailRegex.test(value)) {
-      setEmailError(false);
-    } else {
-      setEmailError(true);
+    // Remove real-time validation - only validate on Enter
+  };
+  
+  const handleEmailKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailRegex.test(e.target.value)) {
+        setEmailError(false);
+      } else {
+        setEmailError(true);
+      }
     }
   };
   return (
     <>
+      <Modal open={openForgotModal}>
+        <ForgotPassword onClose={closeModal} />
+      </Modal>
+      
+      <WelcomeModal 
+        open={showWelcomeModal}
+        onClose={() => setShowWelcomeModal(false)}
+        userType={userType}
+        userName={userName}
+      />
+      
       <Box
         sx={{
           display: "flex",
@@ -72,6 +132,7 @@ export default function LoginSection() {
           fullWidth
           value={email}
           onChange={handleEmailChange}
+          onKeyPress={handleEmailKeyPress}
           error={emailError}
           helperText={
             emailError ? "Please enter a valid email (example@gmail.com)" : ""
@@ -112,10 +173,11 @@ export default function LoginSection() {
         <TextField
           label="Password"
           variant="outlined"
-          type={showPassword ? "text" : "password"} // 👈 toggle type
+          type={showPassword ? "text" : "password"}
           fullWidth
           value={password}
-          onChange={(e) => checkPasswordStrength(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
+
           InputLabelProps={{
             shrink: true,
             sx: {
@@ -158,89 +220,10 @@ export default function LoginSection() {
             },
           }}
         />
-        {password.length > 0 && (
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-              mt: 1,
-            }}
-          >
-            {/* Strength Bar */}
-            <Box
-              sx={{
-                width: "460px",
-                height: "8px",
-                backgroundColor: "#333",
-                borderRadius: "10px",
-                overflow: "hidden",
-                display: "flex",
-              }}
-            >
-              <Box
-                sx={{
-                  height: "100%",
-                  width:
-                    strength === 1
-                      ? "33%"
-                      : strength === 2
-                        ? "66%"
-                        : strength === 3
-                          ? "100%"
-                          : "10%",
-                  backgroundColor:
-                    strength === 1
-                      ? "red"
-                      : strength === 2
-                        ? "dodgerblue"
-                        : strength === 3
-                          ? "limegreen"
-                          : "gray",
-                  transition: "all 0.4s ease",
-                }}
-              />
-            </Box>
-
-            {/* Strength Text */}
-            <Typography
-              sx={{
-                fontSize: "13px",
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                color:
-                  strength === 1
-                    ? "red"
-                    : strength === 2
-                      ? "dodgerblue"
-                      : strength === 3
-                        ? "limegreen"
-                        : "gray",
-              }}
-            >
-              {strength === 1 && (
-                <>
-                  <ErrorIcon fontSize="small" />
-                </>
-              )}
-
-              {strength === 2 && (
-                <>
-                  <WarningIcon fontSize="small" />
-                </>
-              )}
-
-              {strength === 3 && (
-                <>
-                  <CheckCircleIcon fontSize="small" />
-                </>
-              )}
-            </Typography>
-          </Box>
-        )}
+    
         <Button
           variant="contained"
+          onClick={handleLogin}
           sx={{
             width: "100%",
             background: "linear-gradient(45deg,rgb(223 161 27),rgb(248 145 6))",

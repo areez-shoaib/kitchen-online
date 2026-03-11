@@ -244,25 +244,7 @@ export default function ForgotPassword() {
               display: "flex",
               justifyContent: "center",
             }}
-          >
-            <Button
-              onClick={() => navigate("/")}
-              sx={{
-                color: "rgb(218 165 32)",
-                width: "50%",
-                outline: "none",
-                "&:focus": {
-                  outline: "none",
-                },
-                "&:hover": {
-                  bgcolor: "rgb(54 46 27)",
-                  boxShadow: "0 0 25px rgb(65 54 27)",
-                },
-              }}
-            >
-              ← Back to Home
-            </Button>
-          </Box>
+          ></Box>
         </Box>
       </Box>
     </>

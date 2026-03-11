@@ -6,10 +6,13 @@ import ContactScreen from "../src/Screens/ContactScreen";
 import DeliveryScreen from "./Screens/DeliveryScreen";
 import UserLogin from "../src/Modals/UserLogin";
 import SplashScreen from "./Screens/SplashScreen";
+import CustomerDashboard from "./CustomerPanel/CustomerDashboard";
+import AdminDashboard from "./AdminPanel/AdminDashboard";
 import NavBar from "./Components/NavBar";
 import TopBar from "./Components/TopBar";
 import Footer from "../src/Components/Footer";
 import { Box, Divider } from "@mui/material";
+import { AuthProvider } from "./Context/AuthContext";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -50,19 +53,23 @@ function Layout({ children }) {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<SplashScreen />} />
-          <Route path="/SplashScreen" element={<SplashScreen />} />
-          <Route path="/HomeScreen" element={<HomeScreen />} />
-          <Route path="/MenuScreen" element={<MenuScreen />} />
-          <Route path="/ContactScreen" element={<ContactScreen />} />
-          <Route path="/DeliveryScreen" element={<DeliveryScreen />} />
-          <Route path="/UserLogin" element={<UserLogin />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<SplashScreen />} />
+            <Route path="/SplashScreen" element={<SplashScreen />} />
+            <Route path="/HomeScreen" element={<HomeScreen />} />
+            <Route path="/MenuScreen" element={<MenuScreen />} />
+            <Route path="/ContactScreen" element={<ContactScreen />} />
+            <Route path="/DeliveryScreen" element={<DeliveryScreen />} />
+            <Route path="/UserLogin" element={<UserLogin />} />
+            <Route path="/CustomerDashboard" element={<CustomerDashboard />} />
+            <Route path="/AdminDashboard" element={<AdminDashboard />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

@@ -150,9 +150,9 @@ export default function UserLogin() {
               }}
             />
 
-            {activeTab === "login" && <LoginSection />}
+            {activeTab === "login" && <LoginSection setActiveTab={setActiveTab} />}
 
-            {activeTab === "signup" && <SignUpSection />}
+            {activeTab === "signup" && <SignUpSection setActiveTab={setActiveTab} />}
           </Box>
         </Box>
         <Typography
