@@ -5,16 +5,14 @@ export default function SplashTopBar() {
   return (
     <Box
       sx={{
-     
-      
         color: "white",
         flexDirection: { xs: "row", md: "column", lg: "row" },
-   
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        gap: { lg: 3, xs: 2, md: 0 },
+        gap: { lg: 3, xs: 2,  },
         overflow: "hidden",
+        mt:{xs:10,sm:16,md:24,lg:12}
       }}
     >
       <Typography

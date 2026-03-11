@@ -8,7 +8,7 @@ function SplashScreen() {
   return (
     <Box
       sx={{
-        width: "100vw",
+        width: "100%",
         height: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -26,7 +26,7 @@ function SplashScreen() {
       <Box
         sx={{
           position: "absolute",
-          top: 80,
+          top: { xs: 40, sm: 50, md: 70, lg: 60, xl: 80 },
           left: 0,
           right: 0,
           display: "flex",
@@ -42,7 +42,7 @@ function SplashScreen() {
           sx={{
             fontFamily: '"Times New Roman", serif',
             fontWeight: "bold",
-            fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.8rem" },
+            fontSize: { xs: "1rem", sm: "1rem", md: "1.8rem" },
             color: "#daa520",
             textAlign: "center",
             textShadow: "0 0 20px rgba(218, 165, 32, 0.8)",
@@ -51,30 +51,30 @@ function SplashScreen() {
         >
           🎉 WANNA BECOME A PROMOCODE MEMBER!! 🎉
         </Typography>
-        
+
         <Typography
           variant="h6"
           sx={{
             fontFamily: '"Times New Roman", serif',
             fontWeight: "bold",
-            fontSize: { xs: "1rem", sm: "1.2rem", md: "1.4rem" },
+            fontSize: { xs: "0.8rem", sm: "1.2rem", md: "1.4rem" },
             color: "#ff8c00",
             textAlign: "center",
             textShadow: "0 0 15px rgba(255, 140, 0, 0.8)",
-            mb: 2,
+            mb: { xs: 1, xl: 2 }
           }}
         >
           Get 15% off on whole menu
         </Typography>
-        
+
         <Button
           onClick={() => navigate("/PromoCodeScreen")}
           sx={{
-            px: 4,
-            py: 1,
+            px: { lg: 4 },
+            py: { xs: 0.5, lg: 1 },
             borderRadius: "25px",
             fontWeight: "bold",
-            fontSize: { xs: "0.9rem", sm: "1rem" },
+            fontSize: { xs: "0.6rem", sm: "1rem" },
             background: "linear-gradient(45deg, #daa520, #ff8c00)",
             color: "#0f0f0f",
             border: "2px solid #daa520",
@@ -114,7 +114,7 @@ function SplashScreen() {
         sx={{
           fontFamily: '"Georgia", serif',
           fontWeight: 800,
-          fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
+          fontSize: { xs: "1.5rem", sm: "2rem", md: "3rem" ,xl:"4rem" },
           letterSpacing: 2,
           textAlign: "center",
           zIndex: 1,
@@ -131,6 +131,7 @@ function SplashScreen() {
           fontFamily: '"Georgia", serif',
           fontWeight: 500,
           mt: 2,
+          fontSize: { xs: "1rem", sm: "2rem", md: "2rem",xl:"4rem" },
           color: "#f8d12f",
           opacity: 0,
           animation: "fadeInText 1.5s ease 1s forwards",
@@ -146,6 +147,7 @@ function SplashScreen() {
           mt: 4,
           px: 4,
           py: 1.5,
+          fontSize: { xs: "0.8rem", sm: "1rem", md: "1rem" },
           borderRadius: "20px",
           fontWeight: 700,
           background: "linear-gradient(135deg, #daa520 0%, #ff8c00 100%)",
@@ -166,8 +168,9 @@ function SplashScreen() {
         onClick={() => navigate("/HomeScreen")} // Navigate to HomeScreen
         sx={{
           mt: 2,
-          px: 4,
-          py: 1.5,
+          px: {xs:3,md:4},
+          py: {xs:0.5,md:1.5},
+          fontSize: { xs: "0.8rem", sm: "0.5rem", md: "0.8rem" },
           borderRadius: "20px",
           fontWeight: 700,
           background: "transparent",
