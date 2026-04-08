@@ -26,17 +26,13 @@ const AnimatedBox = ({ children, ...props }) => (
 export default function MealsCard() {
   return (
     <>
-      <Box
-        sx={{
+      <Box sx={{
           height: { lg: "450px", xs: "auto" },
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 2,
-          px: { xs: 3, sm: 4, lg: 0 },
-        }}
-      >
+          display: "flex", flexDirection: "column",
+          justifyContent: "center", alignItems: "center",
+          gap: 2, px: { xs: 2, sm: 4, lg: 0 },
+          pb: { xs: 4, lg: 0 },
+        }}>
         <Box
           sx={{
             display: "flex",
@@ -80,17 +76,14 @@ export default function MealsCard() {
         </Box>
         {/* ////////////////////////////////boxes */}
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { lg: "row", xs: "column" },
-            gap: 2,
-            ml: { xs: 9, lg: 0 },
-          }}
-        >
+        <Box sx={{
+            display: "flex", flexDirection: { lg: "row", xs: "column" },
+            alignItems: "center", gap: 2,
+            width: { xs: "100%", lg: "auto" },
+          }}>
           <AnimatedBox
             sx={{
-              width: { lg: "550px", xs: "80%" },
+              width: { lg: "550px", xs: "100%" },
               height: { lg: "290px", xs: "auto" },
             }}
           >
@@ -220,7 +213,7 @@ export default function MealsCard() {
           </AnimatedBox>
           <AnimatedBox
             sx={{
-              width: { lg: "550px", xs: "80%" },
+              width: { lg: "550px", xs: "100%" },
               height: { lg: "290px", xs: "100%" },
             }}
           >

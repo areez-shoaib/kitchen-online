@@ -268,14 +268,15 @@ export default function Footer() {
           </Box>
           <Divider sx={{ borderColor: "rgba(239, 153, 14, 0.16)" }} />
           {/* /////////////////////////text */}
-          <Box
-            sx={{
+          <Box sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: { xs: "center", lg: "space-between" },
+              alignItems: "center",
               flexDirection: { lg: "row", xs: "column" },
-              p:{xs:2}
-            }}
-          >
+              textAlign: "center",
+              gap: { xs: 0.5, lg: 0 },
+              p: { xs: 2 },
+            }}>
             <Typography
               sx={{
                 color: "rgb(176 176 176)",

@@ -244,22 +244,17 @@ export default function MenuScreen() {
             </Typography>
           </Box>
 
-          <Grid
-            container
-            spacing={3}
-            justifyContent="center"
-            sx={{
+          <Grid container spacing={2} justifyContent="center" sx={{
               display: "grid",
               gridTemplateColumns: {
-                xs: "repeat(auto-fit, minmax(320px, 1fr))",
-                sm: "repeat(auto-fit, minmax(320px, 1fr))",
-                md: "repeat(auto-fit, minmax(320px, 1fr))",
-                lg: "repeat(auto-fit, minmax(320px, 1fr))",
+                xs: "1fr",
+                sm: "repeat(2, 1fr)",
+                md: "repeat(3, 1fr)",
+                lg: "repeat(4, 1fr)",
               },
-              gap: 3,
-              px: { xs: 2, sm: 3, md: 4 },
-            }}
-          >
+              gap: { xs: 2, sm: 2, md: 3 },
+              px: { xs: 1, sm: 2, md: 4 },
+            }}>
             {menuData[categories[activeCategory]].map((item, index) => (
               <Grid item key={index}>
                 <FoodCard

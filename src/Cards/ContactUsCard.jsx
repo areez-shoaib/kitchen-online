@@ -4,495 +4,157 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import CallIcon from "@mui/icons-material/Call";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import EmailIcon from "@mui/icons-material/Email";
-import { glowEffect } from "../Animations/GLowAnimation";
 import ContactUsButtons from "../Components/Buttons/ContactUsButtons";
-const AnimatedBox = ({ children, ...props }) => (
-  <Box
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      border: "1px solid rgb(45 40 26)",
-      borderRadius: "12px",
-      bgcolor: "rgb(26 26 26)",
-      height: "20%",
-      ...glowEffect,
-      ...props.sx,
-    }}
-  >
-    {children}
-  </Box>
-);
+
+const infoItems = [
+  { icon: <CallIcon sx={{ fontSize: { xs: 22, sm: 34 }, color: "#daa520" }} />, label: "Phone", value: "+92-3310451716" },
+  { icon: <WhatsAppIcon sx={{ fontSize: { xs: 22, sm: 34 }, color: "#4caf50" }} />, label: "WhatsApp", value: "+92-3310451716" },
+  { icon: <EmailIcon sx={{ fontSize: { xs: 22, sm: 34 }, color: "#daa520" }} />, label: "Email", value: "AreezShoaib@gmail.com" },
+  { icon: <LocationOnIcon sx={{ fontSize: { xs: 22, sm: 34 }, color: "#f44336" }} />, label: "Location", value: "Defence Colony Multan Road DGK" },
+];
+
+const fieldSx = {
+  "& input, & textarea": { color: "white", fontSize: { xs: "0.75rem", sm: "0.95rem" } },
+  "& .MuiInputLabel-root": { fontSize: { xs: "0.72rem", sm: "1rem" } },
+  "& .MuiOutlinedInput-root": { fontSize: { xs: "0.75rem", sm: "0.95rem" } },
+  "& .MuiOutlinedInput-notchedOutline": { borderColor: "rgba(218,165,32,0.2)", borderRadius: "10px" },
+  "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "rgba(218,165,32,0.5)" },
+  "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#daa520", borderWidth: 2 },
+};
+
+// xs placeholder style injected via sx on TextField
+const placeholderSx = {
+  "& input::placeholder": { fontSize: "0.6rem", opacity: 1 },
+  "& textarea::placeholder": { fontSize: "0.6rem", opacity: 1 },
+};
+
+const labelSx = {
+  sx: {
+    color: "rgba(208,208,208,0.7)",
+    "&.Mui-focused": { color: "#ff8c00" },
+  },
+};
+
 export default function ContactUsCard() {
   return (
-    <>
-      <Box
-        sx={{
-          display: "flex",
+    <Box sx={{ px: { xs: 2, sm: 4, md: 6 }, pb: { xs: 4, sm: 6 }, maxWidth: 1100, mx: "auto", width: "100%", boxSizing: "border-box", overflowX: "hidden" }}>
+      <Box sx={{
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        gap: 3,
+        alignItems: { xs: "stretch", md: "flex-start" },
+      }}>
+        {/* Info cards column */}
+        <Box sx={{
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr 1fr", md: "1fr" },
+          gap: { xs: 1.5, sm: 2 },
+          width: { xs: "100%", md: "260px" },
+          flexShrink: 0,
+        }}>
+          {infoItems.map((item, i) => (
+            <Box key={i} sx={{
+              display: "flex", flexDirection: "column",
+              alignItems: "center", justifyContent: "center",
+              p: { xs: 1.5, sm: 2.5 }, gap: { xs: 0.5, sm: 0.8 },
+              minHeight: { xs: 90, sm: "auto" },
+              background: "linear-gradient(145deg, rgba(26,26,26,0.95), rgba(22,22,22,0.9))",
+              border: "1px solid rgba(218,165,32,0.2)",
+              borderRadius: "14px",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                border: "1px solid rgba(218,165,32,0.5)",
+                boxShadow: "0 4px 20px rgba(218,165,32,0.12)",
+                transform: "translateY(-2px)",
+              },
+            }}>
+              {item.icon}
+              <Typography sx={{
+                fontSize: { xs: "0.75rem", sm: "0.95rem" },
+                fontWeight: "bold", fontFamily: "Times New Roman, serif", color: "white",
+              }}>
+                {item.label}
+              </Typography>
+              <Typography sx={{
+                color: "rgba(208,208,208,0.75)",
+                fontSize: { xs: "0.62rem", sm: "0.8rem" },
+                textAlign: "center",
+                wordBreak: "break-word",
+              }}>
+                {item.value}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
 
-          justifyContent: "center",
-          flexDirection: "column",
+        {/* Form */}
+        <Box sx={{
+          flex: 1,
+          background: "linear-gradient(145deg, rgba(26,26,26,0.95), rgba(22,22,22,0.9))",
+          border: "1px solid rgba(218,165,32,0.2)",
+          borderRadius: "20px",
+          overflow: "hidden",
+        }}>
+          {/* Form top bar */}
+          <Box sx={{ height: 3, background: "linear-gradient(90deg, transparent, #daa520, #ff8c00, transparent)" }} />
 
-          alignItems: "center",
-          gap: 0,
-        }}
-      >
-        {/* /////////////////////////////////boxes */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { lg: "row", xs: "column" },
-            width: "90%",
-            maxWidth: "1100px",
-            p: 1,
-            gap: 3,
-            mx: "auto",
-          }}
-        >
-          {/* /////////////////////1 */}
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 3,
-              width: { lg: "33%", xs: "100%" },
-            }}
-          >
-            <AnimatedBox>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  p: 3,
-                  gap: 1,
-                }}
-              >
-                <CallIcon
-                  sx={{
-                    fontSize: { lg: "40px", xs: "30px" },
-                    color: "rgb(224 161 26) ",
-                  }}
-                />
-                <Typography
-                  sx={{
-                    fontSize: { lg: "20px", xs: "16px" },
-                    fontWeight: "bold",
-                    fontFamily: "Times New Roman, serif",
-                  }}
-                >
-                  Phone
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "rgb(208 208 208)",
-                    fontSize: { lg: "16px", xs: "12px" },
-                  }}
-                >
-                  +92-3310451716
-                </Typography>
-              </Box>
-            </AnimatedBox>
-            <AnimatedBox>
-              {" "}
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  p: 3,
-                  gap: 1,
-                }}
-              >
-                <WhatsAppIcon
-                  sx={{
-                    fontSize: { lg: "40px", xs: "30px" },
-                    color: "green",
-                  }}
-                />
-                <Typography
-                  sx={{
-                    fontSize: { lg: "20px", xs: "16px" },
-                    fontWeight: "bold",
-                    fontFamily: "Times New Roman, serif",
-                  }}
-                >
-                  Whatspp No.
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "rgb(208 208 208)",
-                    fontSize: { lg: "16px", xs: "12px" },
-                  }}
-                >
-                  +92-3310451716
-                </Typography>
-              </Box>
-            </AnimatedBox>
-            <AnimatedBox>
-              {" "}
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  p: 3,
-                  gap: 1,
-                }}
-              >
-                <EmailIcon
-                  sx={{
-                    fontSize: { lg: "40px", xs: "30px" },
-                    color: "rgb(224 161 26)",
-                  }}
-                />
-                <Typography
-                  sx={{
-                    fontSize: { lg: "20px", xs: "16px" },
-                    fontWeight: "bold",
-                    fontFamily: "Times New Roman, serif",
-                  }}
-                >
-                  Email
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "rgb(208 208 208)",
-                    fontSize: { lg: "16px", xs: "12px" },
-                  }}
-                >
-                  AreezShoaib@gmail.com
-                </Typography>
-              </Box>
-            </AnimatedBox>
-            <AnimatedBox>
-              {" "}
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  p: 3,
-                  gap: 1,
-                }}
-              >
-                <LocationOnIcon
-                  sx={{
-                    fontSize: { lg: "40px", xs: "30px" },
-                    color: "rgb(211 47 47)",
-                  }}
-                />
-                <Typography
-                  sx={{
-                    fontSize: { lg: "20px", xs: "16px" },
-                    fontWeight: "bold",
-                    fontFamily: "Times New Roman, serif",
-                  }}
-                >
-                  Location
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "rgb(208 208 208)",
-                    fontSize: { lg: "16px", xs: "12px" },
-                  }}
-                >
-                  Deffence Colony Multan Road DGK
-                </Typography>
-              </Box>
-            </AnimatedBox>
-          </Box>
-          {/* ////////////////2 */}
-
-          <AnimatedBox sx={{ flexGrow: 1, height: "70%", p: 3, gap: 3 }}>
+          <Box sx={{ p: { xs: 2, sm: 3.5 }, display: "flex", flexDirection: "column", gap: { xs: 1.5, sm: 2.5 } }}>
             <Box>
-              <Typography
-                sx={{
-                  fontSize: { lg: "20px", xs: "18px" },
-                  fontWeight: "bold",
-                  fontFamily: "Times New Roman, serif",
-                }}
-              >
+              <Typography sx={{
+                fontSize: { xs: "1rem", sm: "1.2rem" },
+                fontWeight: "bold", fontFamily: "Times New Roman, serif", color: "white", mb: 0.3,
+              }}>
                 Send us a Message
               </Typography>
-              <Typography
-                sx={{
-                  color: "rgb(208 208 208)",
-                  fontSize: { lg: "14px", xs: "12px" },
-                }}
-              >
-                {" "}
-                Fill out the form below and we'll get back to you as soon as
-                possible
+              <Typography sx={{ color: "rgba(208,208,208,0.6)", fontSize: { xs: "0.75rem", sm: "0.85rem" } }}>
+                Fill out the form and we'll get back to you as soon as possible
               </Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                margin: "0px auto",
-                gap: 2,
-                width: "100%", // field width
-              }}
-            >
-              <TextField
-                label="First Name *" // 👈 ye label click karne par upar chala jayega
-                placeholder="Your Full Name"
-                // 👈 standard MUI border style
-                variant="outlined"
-                fullWidth
-                InputLabelProps={{
-                  sx: {
-                    color: "rgb(208 208 208)",
-                    fontSize: { lg: "16px", xs: "15px" }, // normal label color
-                    "&.Mui-focused": {
-                      color: "rgb(244 148 10)", // label color on focus
-                    },
-                  },
-                }}
-                InputProps={{
-                  sx: {
-                    "& input": {
-                      color: "white",
-                      fontSize: { lg: "16px", xs: "12px" }, // typed text color
-                    },
-                    "& input::placeholder": {
-                      color: "rgb(78 78 78)",
-                      opacity: 1,
-                      fontSize: { lg: "16px", xs: "13px" },
-                    },
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "black", // default border
-                      borderWidth: "0.1px", // border thickness
-                      borderRadius: "8px", // border radius
-                    },
-                    "&:hover .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "white", // hover border
-                    },
-                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "rgb(244 148 10)", // focus border matches label color
-                    },
-                  },
-                }}
-              />
 
-              <TextField
-                label="Phone Number *"
-                placeholder="03310451716"
-                variant="outlined"
-                fullWidth
-                InputLabelProps={{
-                  sx: {
-                    color: "rgb(208 208 208)",
-                    fontSize: { lg: "16px", xs: "15px" }, // normal label color
-                    "&.Mui-focused": {
-                      color: "rgb(244 148 10)", // label color on focus
-                    },
-                  },
-                }}
-                InputProps={{
-                  sx: {
-                    "& input": {
-                      color: "white",
-                      fontSize: { lg: "16px", xs: "12px" }, // typed text color
-                    },
-                    "& input::placeholder": {
-                      color: "rgb(78 78 78)",
-                      opacity: 1,
-                      fontSize: { lg: "16px", xs: "13px" },
-                    },
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "black", // default border
-                      borderWidth: "0.4px", // border thickness
-                      borderRadius: "8px", // border radius
-                    },
-                    "&:hover .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "white", // hover border
-                    },
-                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "rgb(244 148 10)", // focus border matches label color
-                    },
-                  },
-                }}
-              />
-            </Box>
-            {/* //////////////////2ndrow */}
-            <Box
-              sx={{
-                display: "flex",
-                margin: "0px auto",
-                gap: 2,
-                width: "100%", // field width
-              }}
-            >
-              <TextField
-                label="Email (optional)"
-                placeholder="abc@gmail.com"
-                variant="outlined"
-                fullWidth
-                InputLabelProps={{
-                  sx: {
-                    color: "rgb(208 208 208)",
-                    fontSize: { lg: "16px", xs: "16px" }, // normal label color
-                    "&.Mui-focused": {
-                      color: "rgb(244 148 10)", // label color on focus
-                    },
-                  },
-                }}
-                InputProps={{
-                  sx: {
-                    "& input": {
-                      color: "white",
-                      fontSize: { lg: "16px", xs: "12px" }, // typed text color
-                    },
-                    "& input::placeholder": {
-                      color: "rgb(78 78 78)",
-                      opacity: 1,
-                      fontSize: { lg: "16px", xs: "13px" },
-                    },
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "black", // default border
-                      borderWidth: "0.4px", // border thickness
-                      borderRadius: "8px", // border radius
-                    },
-                    "&:hover .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "white", // hover border
-                    },
-                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "rgb(244 148 10)", // focus border matches label color
-                    },
-                  },
-                }}
-              />
-            </Box>
-            {/* /////////////////3rd */}
-            <Box
-              sx={{
-                display: "flex",
-                margin: "0px auto",
-                gap: 2,
-                width: "100%",
-              }}
-            >
-              <TextField
-                label="Delivery Address*"
-                placeholder="Enter your complete address"
-                variant="outlined"
-                fullWidth
-                InputLabelProps={{
-                  sx: {
-                    color: "rgb(208 208 208)",
-                    fontSize: { lg: "16px", xs: "16px" }, // normal label color
-                    "&.Mui-focused": {
-                      color: "rgb(244 148 10)", // label color on focus
-                    },
-                  },
-                }}
-                InputProps={{
-                  sx: {
-                    "& input": {
-                      color: "white", // typed text color
-                      height: "60px", // typed text area height
-                      padding: "12px",
-                      fontSize: { lg: "16px", xs: "12px" }, // internal padding
-                    },
-                    "& input::placeholder": {
-                      color: "rgb(78 78 78)",
-                      opacity: 1,
-                      fontSize: { lg: "16px", xs: "13px" },
-                    },
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "black", // default border
-                      borderWidth: "0.4px", // border thickness
-                      borderRadius: "8px", // border radius
-                    },
-                    "&:hover .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "white", // hover border
-                    },
-                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "rgb(244 148 10)", // focus border matches label color
-                    },
-                  },
-                }}
-              />
-            </Box>
-            {/* /////////////////////////4 */}
-            <Box
-              sx={{
-                display: "flex",
-                margin: "0px auto",
-                gap: 2,
-
-                width: "100%", // field width
-              }}
-            >
-              <TextField
-                label="Special Instruction & Questions"
-                placeholder="Let's tell about your preferences, dietary restrictions, or any question"
-                variant="outlined"
-                fullWidth
-                InputLabelProps={{
-                  sx: {
-                    color: "rgb(208 208 208)",
-                    fontSize: { lg: "16px", xs: "16px" }, // normal label color
-                    "&.Mui-focused": {
-                      color: "rgb(244 148 10)", // label color on focus
-                    },
-                  },
-                }}
-                InputProps={{
-                  sx: {
-                    "& input": {
-                      color: "white", // typed text color
-                      height: { lg: "100px", xs: "70px" }, // typed text area height
-                      padding: "12px", // internal padding
-                      fontSize: { lg: "16px", xs: "12px" },
-                    },
-                    "& input::placeholder": {
-                      color: "rgb(78 78 78)",
-                      opacity: 1,
-                      fontSize: { lg: "16px", xs: "9px" },
-                    },
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "black", // default border
-                      borderWidth: "1px", // border thickness
-                      borderRadius: "8px", // border radius
-                    },
-                    "&:hover .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "white", // hover border
-                    },
-                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "rgb(244 148 10)", // focus border matches label color
-                    },
-                  },
-                }}
-              />
+            {/* Row 1 */}
+            <Box sx={{ display: "flex", gap: { xs: 1, sm: 2 }, flexDirection: { xs: "column", sm: "row" } }}>
+              <TextField size="small" label="First Name *" placeholder="Your Full Name" variant="outlined" fullWidth
+                sx={placeholderSx} InputLabelProps={labelSx} InputProps={{ sx: fieldSx }} />
+              <TextField size="small" label="Phone Number *" placeholder="03310451716" variant="outlined" fullWidth
+                sx={placeholderSx} InputLabelProps={labelSx} InputProps={{ sx: fieldSx }} />
             </Box>
 
-            <Box>
-              <Button
-                variant="contained"
-                sx={{
-                  width: "100%",
-                  height: { lg: "45px", xs: "35px" },
-                  background:
-                    "linear-gradient(45deg, rgb(225 160 25), rgb(246 146 8))",
-                  color: "black",
-                  fontWeight: "bold",
-                  textTransform: "none",
-                  fontSize: { lg: "16px", xs: "12px" },
-                }}
-              >
-                Send Message
-              </Button>
-            </Box>
-          </AnimatedBox>
+            {/* Row 2 */}
+            <TextField size="small" label="Email (optional)" placeholder="abc@gmail.com" variant="outlined" fullWidth
+              sx={placeholderSx} InputLabelProps={labelSx} InputProps={{ sx: fieldSx }} />
+
+            {/* Row 3 */}
+            <TextField size="small" label="Delivery Address *" placeholder="Enter your complete address" variant="outlined" fullWidth
+              sx={placeholderSx} InputLabelProps={labelSx} InputProps={{ sx: fieldSx }} />
+
+            {/* Row 4 */}
+            <TextField
+              label="Special Instructions & Questions"
+              placeholder="Tell us about your preferences, dietary restrictions, or any questions"
+              variant="outlined" fullWidth multiline rows={3}
+              sx={placeholderSx}
+              InputLabelProps={labelSx}
+              InputProps={{ sx: { ...fieldSx, "& textarea": { color: "white", fontSize: { xs: "0.75rem", sm: "0.9rem" } } } }}
+            />
+
+            <Button variant="contained" sx={{
+              background: "linear-gradient(135deg, #daa520, #ff8c00)",
+              color: "#0a0a0a", fontWeight: "bold", textTransform: "none",
+              borderRadius: "12px", py: { xs: 1.2, sm: 1.4 },
+              fontSize: { xs: "0.875rem", sm: "1rem" },
+              boxShadow: "0 4px 15px rgba(218,165,32,0.35)",
+              transition: "all 0.3s ease",
+              "&:hover": { transform: "translateY(-1px)", boxShadow: "0 6px 22px rgba(218,165,32,0.55)" },
+            }}>
+              Send Message
+            </Button>
+          </Box>
         </Box>
-        {/* //////////////// */}
+      </Box>
+
+      <Box sx={{ mt: 3 }}>
         <ContactUsButtons />
       </Box>
-    </>
+    </Box>
   );
 }

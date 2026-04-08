@@ -12,15 +12,11 @@ import DeliveryTopSection from "../Sections/DeliveryTopSection";
 export default function DeliveryScreen() {
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 5,
-        }}
-      >
+      <Box sx={{
+        display: "flex", flexDirection: "column",
+        alignItems: "center", gap: { xs: 3, sm: 5 },
+        width: "100%", overflowX: "hidden", boxSizing: "border-box",
+      }}>
         <DeliveryTopSection />
         <DeliveryButtons />
         <AvailabilityCard />

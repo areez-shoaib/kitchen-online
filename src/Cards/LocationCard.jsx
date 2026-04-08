@@ -25,15 +25,12 @@ const AnimatedBox = ({ children, ...props }) => (
 export default function LocationCard() {
   return (
     <>
-      <AnimatedBox
-        sx={{
-          width: "73%",
-          height: "auto",
-          gap: 3,
-        }}
-      >
+      <AnimatedBox sx={{
+        width: { xs: "92%", sm: "85%", md: "80%", lg: "73%" },
+        height: "auto", gap: 3, boxSizing: "border-box",
+      }}>
         
-        <Box sx={{ width: "100%", height: "500px" }}>
+        <Box sx={{ width: "100%", height: { xs: 250, sm: 350, md: 500 } }}>
           <iframe
             src="https://www.google.com/maps?q=Dera%20Ghazi%20Khan&output=embed"
             width="100%"

@@ -2,7 +2,7 @@ import { Button, Box } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 
-export default function NavBarButtons() {
+export default function NavBarButtons({ onClose }) {
   const { user, isAuthenticated } = useAuth();
   const mainButtons = {
     textTransform: "none",
@@ -18,10 +18,10 @@ export default function NavBarButtons() {
   const getNavigationItems = () => {
     if (!isAuthenticated) {
       return [
-        { to: "/", label: "Home" },
+        { to: "/HomeScreen", label: "Home" },
         { to: "/MenuScreen", label: "Menu" },
         { to: "/ContactScreen", label: "Contact" },
-        { to: "DeliveryScreen", label: "Delivery Map" },
+        { to: "/DeliveryScreen", label: "Delivery Map" },
       ];
     }
 
@@ -61,7 +61,7 @@ export default function NavBarButtons() {
       sx={{
         display: "flex",
         gap: 2,
-        flexDirection: { lg: "row", xs: "column" },
+        flexDirection: { xs: "column", sm: "row" },
       }}
     >
       {getNavigationItems().map((btn) => {
@@ -71,6 +71,7 @@ export default function NavBarButtons() {
             key={btn.to}
             component={Link}
             to={btn.to}
+            onClick={onClose}
             variant="contained"
             sx={{
               ...mainButtons,

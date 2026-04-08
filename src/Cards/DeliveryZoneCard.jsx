@@ -12,19 +12,12 @@ import { glowEffect } from "../Animations/GLowAnimation";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 
 const AnimatedBox = ({ children, ...props }) => (
-  <Box
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      border: "2px solid rgb(61 51 26)",
-      borderRadius: "10px",
-      bgcolor: "rgb(26 26 26)",
-      height: "400px",
-      width: "280px",
-      ...glowEffect,
-      ...props.sx,
-    }}
-  >
+  <Box sx={{
+    display: "flex", flexDirection: "column",
+    border: "2px solid rgb(61,51,26)",
+    borderRadius: "10px", bgcolor: "rgb(26,26,26)",
+    ...glowEffect, ...props.sx,
+  }}>
     {children}
   </Box>
 );
@@ -40,30 +33,21 @@ export default function DeliverZoneCard() {
           gap: 3,
         }}
       >
-        <Box>
-          <Typography
-            sx={{
-              color: "rgb(218 165 32)",
-              fontSize: { lg: "45px", xs: "20px" },
-              fontWeight: "bold",
-              fontFamily: "Times New Roman, serif",
-            }}
-          >
+        <Box sx={{ px: { xs: 2, sm: 0 }, textAlign: { xs: "center", sm: "left" } }}>
+          <Typography sx={{
+            color: "rgb(218,165,32)",
+            fontSize: { xs: "1.2rem", sm: "1.6rem", md: "2rem", lg: "2.5rem" },
+            fontWeight: "bold", fontFamily: "Times New Roman, serif",
+          }}>
             Our Delivery Zones in DG Khan
           </Typography>
         </Box>
-        <Box>
-          <Typography
-            sx={{
-              color: "rgb(208 208 208)",
-              fontSize: { lg: "16px", xs: "14px" },
-              fontWeight: "500",
-
-              maxWidth: "700px",
-              textAlign: "center",
-              margin: "0 auto",
-            }}
-          >
+        <Box sx={{ px: { xs: 2, sm: 0 } }}>
+          <Typography sx={{
+            color: "rgb(208,208,208)",
+            fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem" },
+            maxWidth: "700px", textAlign: "center", margin: "0 auto",
+          }}>
             We deliver homemade food to all major areas of Dera Ghazi Khan.
             Click on your area to view details and estimated delivery times.
           </Typography>
@@ -71,13 +55,14 @@ export default function DeliverZoneCard() {
 
         {/* ////////////////////////////////boxes */}
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { lg: "row", xs: "column" },
-            gap: 3,
-          }}
-        >
+        <Box sx={{
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          flexWrap: { sm: "wrap", lg: "nowrap" },
+          gap: 3,
+          width: { xs: "92%", sm: "90%", lg: "auto" },
+          justifyContent: "center",
+        }}>
           <AnimatedBox>
             <Box
               sx={{
@@ -101,7 +86,7 @@ export default function DeliverZoneCard() {
 
                 <Typography
                   sx={{
-                    fontSize: { lg: "22px", xs: "20px" },
+                    fontSize: { xs: "0.95rem", sm: "1.1rem", lg: "1.3rem" },
                     fontWeight: "bold",
                     color: "rgb(218 165 32)",
                     fontFamily: "Times New Roman, serif",
@@ -309,7 +294,7 @@ export default function DeliverZoneCard() {
 
                 <Typography
                   sx={{
-                    fontSize: { lg: "22px", xs: "20px" },
+                    fontSize: { xs: "0.95rem", sm: "1.1rem", lg: "1.3rem" },
                     fontWeight: "bold",
                     color: "rgb(218 165 32)",
                     fontFamily: "Times New Roman, serif",
@@ -517,7 +502,7 @@ export default function DeliverZoneCard() {
 
                 <Typography
                   sx={{
-                    fontSize: { lg: "22px", xs: "20px" },
+                    fontSize: { xs: "0.95rem", sm: "1.1rem", lg: "1.3rem" },
                     fontWeight: "bold",
                     color: "rgb(218 165 32)",
                     fontFamily: "Times New Roman, serif",
@@ -720,7 +705,7 @@ export default function DeliverZoneCard() {
 
                 <Typography
                   sx={{
-                    fontSize: { lg: "22px", xs: "20px" },
+                    fontSize: { xs: "0.95rem", sm: "1.1rem", lg: "1.3rem" },
                     fontWeight: "bold",
                     color: "rgb(218 165 32)",
                     fontFamily: "Times New Roman, serif",

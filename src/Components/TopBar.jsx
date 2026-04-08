@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Box, Grid, Paper, Divider, Typography, Button, IconButton } from "@mui/material";
+import { Box, Typography, Button, IconButton } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import EditIcon from "@mui/icons-material/Edit";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { useAuth } from "../Context/AuthContext";
 import { useLocation } from "react-router-dom";
 import TopBarEditModal from "../Modals/TopBarEditModal";
@@ -9,8 +10,8 @@ import TopBarEditModal from "../Modals/TopBarEditModal";
 export default function TopBar() {
   const { user, isAuthenticated } = useAuth();
   const location = useLocation();
-  const isAdmin = isAuthenticated && user?.role === 'admin' && location.pathname === '/AdminDashboard';
-  
+  const isAdmin = isAuthenticated && user?.role === "admin" && location.pathname === "/AdminDashboard";
+
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [topBarData, setTopBarData] = useState({
     title: "Biryani Special",
@@ -19,171 +20,141 @@ export default function TopBar() {
     discountText: "30% off",
     orderButtonText: "Order Now",
     whatsappNumber: "+923310451716",
-    whatsappMessage: "Hello! I would like to place an order from Biryani Hub."
+    whatsappMessage: "Hello! I would like to place an order from Biryani Hub.",
   });
 
-  const handleSave = () => {
-    // Here you can save the data to backend or localStorage
-    console.log("TopBar data saved:", topBarData);
+  const handleOrderNowClick = () => {
+    const url = `https://wa.me/${topBarData.whatsappNumber.replace("+", "")}?text=${encodeURIComponent(topBarData.whatsappMessage)}`;
+    window.open(url, "_blank");
   };
 
-  const handleOrderNowClick = () => {
-    const whatsappUrl = `https://wa.me/${topBarData.whatsappNumber.replace('+', '')}?text=${encodeURIComponent(topBarData.whatsappMessage)}`;
-    window.open(whatsappUrl, '_blank');
-  };
   return (
     <>
-      <Box
-        sx={{
-          height: { xs: "auto", md: "auto", lg: "60px" },
-          backgroundColor: "rgb(26 26 26)",
-          color: "white",
-          flexDirection: { xs: "row", md: "column", lg: "row" },
-          background: "radial-gradient(circle, rgb(81 61 11) 20%,  #1a1a1a 40%)",
+      <Box sx={{
+        background: "linear-gradient(90deg, #0f0f0f 0%, rgb(60,42,8) 40%, rgb(60,42,8) 60%, #0f0f0f 100%)",
+        borderBottom: "1px solid rgba(218,165,32,0.2)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        py: { xs: 1, sm: 0 },
+        minHeight: { xs: "auto", sm: "52px" },
+        position: "relative",
+        overflow: "hidden",
+      }}>
+        {/* shimmer line */}
+        <Box sx={{
+          position: "absolute", bottom: 0, left: 0, right: 0, height: "1px",
+          background: "linear-gradient(90deg, transparent, rgba(218,165,32,0.5), transparent)",
+        }} />
+
+        <Box sx={{
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: { lg: 3, xs: 2, md: 0 },
-          position: "relative",
-        }}
-      >
-      <Box
-        sx={{
-          display: "flex",
-          gap: { lg: 3, xs: 0, md: 0 },
-          flexDirection: { xs: "column", md: "column", lg: "row" },
+          flexDirection: "row",
+          flexWrap: "wrap",
           justifyContent: "center",
           alignItems: "center",
-        }}
-      >
-        <Box>
-          <Typography
-            sx={{
+          gap: { xs: 1, sm: 2 },
+          px: { xs: 1, sm: 3 },
+          py: { xs: 0.8, sm: 0 },
+          width: "100%",
+          maxWidth: 900,
+        }}>
+          {/* Title + prices */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap", justifyContent: "center" }}>
+            <Typography sx={{
               fontWeight: "bold",
-              fontSize: { xs: "16px", md: "20px", lg: "24px" },
+              fontSize: { xs: "0.9rem", sm: "1rem", md: "1.15rem" },
               fontFamily: "Times New Roman, serif",
-              display: "flex",
-              gap: 1,
-              alignItems: "center",
-            }}
-          >
-            {topBarData.title}
-            <Typography
-              component={"span"}
-              sx={{
-                textDecoration: "line-through",
-                color: "rgb(30 115 7)",
-                fontSize: { xs: "10px", md: "12px", lg: "13px" },
-                fontWeight: "900",
-              }}
-            >
+              color: "white",
+              letterSpacing: 0.5,
+            }}>
+              {topBarData.title}
+            </Typography>
+            <Typography component="span" sx={{
+              textDecoration: "line-through",
+              color: "rgba(76,175,80,0.9)",
+              fontSize: { xs: "0.7rem", sm: "0.75rem" },
+              fontWeight: 700,
+            }}>
               {topBarData.originalPrice}
             </Typography>
-            <Typography
-              component={"span"}
-              sx={{
-                fontWeight: 1000,
-                fontSize: { xs: "10px", md: "12px", lg: "13px" },
-                color: "rgb(218 165  32)",
-              }}
-            >
+            <Typography component="span" sx={{
+              color: "#daa520",
+              fontSize: { xs: "0.75rem", sm: "0.8rem" },
+              fontWeight: 800,
+            }}>
               {topBarData.discountedPrice}
             </Typography>
-          </Typography>
-        </Box>
-        <Box>
-          <Button
-            variant="contained"
-            sx={{
-              color: "black",
-              background:
-                "linear-gradient(45deg, rgb(225 160 25), rgb(246 146 8))",
-              fontWeight: 900,
-              fontSize: { xs: "10px", md: "12px", lg: "14px" },
-              borderRadius: "20px",
-              px: 1,
-              py: 0.5,
-              gap: 1,
-              pointerEvents: isAdmin ? "auto" : "none",
+          </Box>
 
-              animation: "glow 2s infinite alternate",
-              textTransform: "none",
-              "@keyframes glow": {
-                "0%": {
-                  boxShadow: "0 0 5px rgba(255, 193, 7, 0.3)",
-                },
-                "50%": {
-                  transform: "translateY(-4px)",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
-                },
-                "100%": {
-                  boxShadow: "0 0 20px rgba(255, 193, 7, 0.8)",
-                },
-              },
-            }}
-          >
-            <LocalOfferIcon sx={{ color: "rgb(97 97 97)", fontSize: "14px" }} />
+          {/* Discount badge */}
+          <Button sx={{
+            color: "#0a0a0a",
+            background: "linear-gradient(135deg, #daa520, #ff8c00)",
+            fontWeight: 800,
+            fontSize: { xs: "0.65rem", sm: "0.7rem" },
+            borderRadius: "20px",
+            px: { xs: 1.5, sm: 2 },
+            py: 0.4,
+            minWidth: "auto",
+            pointerEvents: "none",
+            textTransform: "none",
+            boxShadow: "0 2px 10px rgba(218,165,32,0.4)",
+            animation: "topbarGlow 2s infinite alternate",
+            "@keyframes topbarGlow": {
+              "0%": { boxShadow: "0 0 5px rgba(218,165,32,0.3)" },
+              "100%": { boxShadow: "0 0 18px rgba(218,165,32,0.8)" },
+            },
+          }}>
+            <LocalOfferIcon sx={{ fontSize: "0.75rem", mr: 0.5 }} />
             {topBarData.discountText}
           </Button>
-        </Box>
-        <Box sx={{}}>
+
+          {/* Order Now */}
           <Button
-            variant="contained"
             onClick={handleOrderNowClick}
+            startIcon={<WhatsAppIcon sx={{ fontSize: "0.9rem !important" }} />}
             sx={{
-              color: "black",
-              outline: "none", // focus outline remove
-          
-              background:
-                "linear-gradient(45deg, rgb(225 160 25),rgb(246 146 8))",
-              fontWeight: 900,
-              fontSize: "14px",
+              color: "#0a0a0a",
+              background: "linear-gradient(135deg, #daa520, #ff8c00)",
+              fontWeight: 700,
+              fontSize: { xs: "0.7rem", sm: "0.8rem" },
               textTransform: "none",
-              borderRadius: { lg: "13px", xs: "2px" },
-              px: { lg: 3, xs: 0.2 },
-              py: { xs: 0.1, lg: 0.8 },
-              "&:focus": {
-                outline: "none",
-         
+              borderRadius: "20px",
+              px: { xs: 2, sm: 2.5 },
+              py: { xs: 0.5, sm: 0.6 },
+              boxShadow: "0 2px 10px rgba(218,165,32,0.3)",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                transform: "translateY(-1px)",
+                boxShadow: "0 4px 18px rgba(218,165,32,0.6)",
               },
-              "&:active": {
-                outline: "none",
-        
-              },
+              "&:focus": { outline: "none" },
             }}
           >
             {topBarData.orderButtonText}
           </Button>
         </Box>
-        
-        {/* Admin Edit Button */}
+
         {isAdmin && (
-          <Box sx={{ position: "absolute", top: 10, right: 10 }}>
-            <IconButton
-              onClick={() => setEditModalOpen(true)}
-              sx={{
-                color: "rgba(255, 193, 7, 0.8)",
-                bgcolor: "rgba(218, 165  32, 0.1)",
-                "&:hover": {
-                  bgcolor: "rgba(218, 165  32, 0.2)",
-                },
-              }}
-            >
-              <EditIcon />
-            </IconButton>
-          </Box>
+          <IconButton onClick={() => setEditModalOpen(true)} sx={{
+            position: "absolute", top: 6, right: 10,
+            color: "rgba(218,165,32,0.8)",
+            bgcolor: "rgba(218,165,32,0.08)",
+            "&:hover": { bgcolor: "rgba(218,165,32,0.18)" },
+          }}>
+            <EditIcon fontSize="small" />
+          </IconButton>
         )}
       </Box>
 
-      {/* Edit Modal */}
       <TopBarEditModal
         open={editModalOpen}
         onClose={() => setEditModalOpen(false)}
         topBarData={topBarData}
         setTopBarData={setTopBarData}
-        onSave={handleSave}
+        onSave={() => {}}
       />
-      </Box>
     </>
   );
 }

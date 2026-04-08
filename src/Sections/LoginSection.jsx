@@ -1,22 +1,10 @@
 import React, { useState } from "react";
 import {
-  Box,
-  Grid,
-  Paper,
-  Divider,
-  Typography,
-  Button,
-  TextField,
-  InputAdornment,
-  IconButton,
+  Box, Typography, Button, TextField,
+  InputAdornment, IconButton, Modal,
 } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
-import ErrorIcon from "@mui/icons-material/Error";
-import WarningIcon from "@mui/icons-material/Warning";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { Modal } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ForgotPassword from "../Modals/ForgotPassword";
@@ -24,242 +12,136 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import WelcomeModal from "../Modals/WelcomeModal";
 
+const fieldSx = {
+  borderRadius: "10px",
+  "& input": { color: "white", fontSize: { xs: "0.875rem", sm: "1rem" } },
+  "& .MuiOutlinedInput-notchedOutline": { borderColor: "rgba(218,165,32,0.25)", borderRadius: "10px" },
+  "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "rgba(218,165,32,0.6)" },
+  "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#daa520", borderWidth: 2 },
+  "& input::placeholder": { color: "rgba(255,255,255,0.3)" },
+};
+
+const labelSx = {
+  shrink: true,
+  sx: {
+    color: "rgba(208,208,208,0.7)",
+    fontSize: { xs: "0.875rem", sm: "1rem" },
+    "&.Mui-focused": { color: "#ff8c00" },
+  },
+};
+
 export default function LoginSection({ setActiveTab }) {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
-  const [strength, setStrength] = useState(0);
   const [showPassword, setShowPassword] = useState(false);
   const [openForgotModal, setOpenForgotModal] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
-  const [userType, setUserType] = useState('customer');
-  const [userName, setUserName] = useState('');
-  
-  const openModal = () => {
-    setOpenForgotModal(true);
+  const [userType, setUserType] = useState("customer");
+  const [userName, setUserName] = useState("");
+
+  const handleEmailKeyPress = (e) => {
+    if (e.key === "Enter") {
+      setEmailError(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value));
+    }
   };
-  
-  const closeModal = () => {
-    setOpenForgotModal(false);
-  };
-  
+
   const handleLogin = () => {
-    if (!email.trim() || !password.trim()) {
-      alert('Please fill in all fields');
-      return;
-    }
-    
-    if (emailError) {
-      alert('Please enter a valid email address');
-      return;
-    }
-    
+    if (!email.trim() || !password.trim()) { alert("Please fill in all fields"); return; }
+    if (emailError) { alert("Please enter a valid email address"); return; }
     const result = login(email, password);
     if (result.success) {
-      // Set welcome modal data
       setUserType(result.role);
-      setUserName(result.role === 'admin' ? 'AREEZ KORAI' : email.split('@')[0].toUpperCase());
+      setUserName(result.role === "admin" ? "AREEZ KORAI" : email.split("@")[0].toUpperCase());
       setShowWelcomeModal(true);
-      
-      // Navigate after delay
-      setTimeout(() => {
-        if (result.role === 'admin') {
-          navigate('/AdminDashboard');
-        } else {
-          navigate('/CustomerDashboard');
-        }
-      }, 3000);
+      setTimeout(() => navigate(result.role === "admin" ? "/AdminDashboard" : "/CustomerDashboard"), 3000);
     } else {
-      alert('Invalid credentials');
+      alert("Invalid credentials");
     }
   };
-  const checkPasswordStrength = (value) => {
-    setPassword(value);
 
-    let score = 0;
-
-    if (value.length >= 8) score++;
-    if (/[A-Z]/.test(value)) score++;
-    if (/[!@#$%^&*(),.?":{}|<>]/.test(value)) score++;
-
-    setStrength(score);
-  };
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-    // Remove real-time validation - only validate on Enter
-  };
-  
-  const handleEmailKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (emailRegex.test(e.target.value)) {
-        setEmailError(false);
-      } else {
-        setEmailError(true);
-      }
-    }
-  };
   return (
     <>
-      <Modal open={openForgotModal}>
-        <ForgotPassword onClose={closeModal} />
-      </Modal>
-      
-      <WelcomeModal 
-        open={showWelcomeModal}
-        onClose={() => setShowWelcomeModal(false)}
-        userType={userType}
-        userName={userName}
-      />
-      
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          p: 3,
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 3,
-          mt: 2,
-        }}
-      >
+      <Modal open={openForgotModal}><ForgotPassword onClose={() => setOpenForgotModal(false)} /></Modal>
+      <WelcomeModal open={showWelcomeModal} onClose={() => setShowWelcomeModal(false)} userType={userType} userName={userName} />
+
+      <Box sx={{ display: "flex", flexDirection: "column", p: { xs: 2.5, sm: 3 }, gap: 2.5 }}>
+        {/* Email */}
         <TextField
-          label="Email"
-          variant="outlined"
-          fullWidth
-          value={email}
-          onChange={handleEmailChange}
+          label="Email" variant="outlined" fullWidth
+          value={email} onChange={(e) => setEmail(e.target.value)}
           onKeyPress={handleEmailKeyPress}
           error={emailError}
-          helperText={
-            emailError ? "Please enter a valid email (example@gmail.com)" : ""
-          }
-          InputLabelProps={{
-            shrink: true,
-            sx: {
-              color: "rgb(208 208 208)",
-              fontSize: { lg: "16px", xs: "15px" },
-              "&.Mui-focused": {
-                color: "rgb(244 148 10)",
-              },
-            },
-          }}
+          helperText={emailError ? "Please enter a valid email (example@gmail.com)" : ""}
+          FormHelperTextProps={{ sx: { color: "#ff5252", ml: 0.5 } }}
+          InputLabelProps={labelSx}
           InputProps={{
-            startAdornment: (
-              <EmailIcon sx={{ color: "rgb(204 155 32)", mr: 1 }} />
-            ),
-            sx: {
-              "& input": {
-                color: "white",
-                fontSize: { lg: "16px", xs: "12px" },
-              },
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgb(72 61 34)",
-                borderWidth: "0.1px",
-                borderRadius: "8px",
-              },
-              "&:hover .MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgb(204 155 32)",
-              },
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgb(244 148 10)",
-              },
-            },
+            startAdornment: <EmailIcon sx={{ color: "rgba(218,165,32,0.7)", mr: 1, fontSize: 20 }} />,
+            sx: fieldSx,
           }}
         />
-        <TextField
-          label="Password"
-          variant="outlined"
-          type={showPassword ? "text" : "password"}
-          fullWidth
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
 
-          InputLabelProps={{
-            shrink: true,
-            sx: {
-              color: "rgb(208 208 208)",
-              fontSize: { lg: "16px", xs: "15px" },
-              "&.Mui-focused": { color: "rgb(244 148 10)" },
-            },
-          }}
+        {/* Password */}
+        <TextField
+          label="Password" variant="outlined" fullWidth
+          type={showPassword ? "text" : "password"}
+          value={password} onChange={(e) => setPassword(e.target.value)}
+          InputLabelProps={labelSx}
           InputProps={{
-            startAdornment: (
-              <LockIcon sx={{ color: "rgb(204 155 32)", mr: 1 }} />
-            ),
+            startAdornment: <LockIcon sx={{ color: "rgba(218,165,32,0.7)", mr: 1, fontSize: 20 }} />,
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton
-                  onClick={() => setShowPassword(!showPassword)}
-                  edge="end"
-                  sx={{ color: "rgb(204 155 32)" }}
-                >
-                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                <IconButton onClick={() => setShowPassword(!showPassword)} edge="end" sx={{ color: "rgba(218,165,32,0.7)" }}>
+                  {showPassword ? <Visibility fontSize="small" /> : <VisibilityOff fontSize="small" />}
                 </IconButton>
               </InputAdornment>
             ),
-            sx: {
-              "& input": {
-                color: "white",
-                fontSize: { lg: "16px", xs: "12px" },
-              },
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgb(72 61 34)",
-                borderWidth: "0.1px",
-                borderRadius: "8px",
-              },
-              "&:hover .MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgb(204 155 32)",
-              },
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgb(244 148 10)",
-              },
-            },
+            sx: fieldSx,
           }}
         />
-    
+
+        {/* Login Button */}
         <Button
-          variant="contained"
-          onClick={handleLogin}
+          variant="contained" onClick={handleLogin}
           sx={{
-            width: "100%",
-            background: "linear-gradient(45deg,rgb(223 161 27),rgb(248 145 6))",
-            py: 1.5,
-            color: "black",
-            fontWeight: 600,
-            textTransform: "none",
-            fontSize: "16px",
-            outline: "none",
-            "&:focus": {
-              outline: "none",
+            background: "linear-gradient(135deg, #daa520 0%, #ff8c00 100%)",
+            color: "#0a0a0a", fontWeight: "bold", borderRadius: "12px",
+            py: { xs: 1.3, sm: 1.5 }, textTransform: "none",
+            fontSize: { xs: "0.9rem", sm: "1rem" },
+            boxShadow: "0 4px 20px rgba(218,165,32,0.35)",
+            transition: "all 0.3s ease",
+            "&:hover": {
+              background: "linear-gradient(135deg, #ff8c00 0%, #daa520 100%)",
+              transform: "translateY(-1px)",
+              boxShadow: "0 6px 25px rgba(218,165,32,0.5)",
             },
           }}
         >
           Login
         </Button>
-        <Typography
-          sx={{
-            color: "rgb(218 165 32)",
-            fontWeight: "bold",
-            cursor: "pointer",
-          }}
-          onClick={() => setActiveTab("signup")} // optional: click to switch tab
-        >
-          Don't have account? Sign Up
-        </Typography>
-        <Typography
-          sx={{
-            color: "rgb(255 140 0)",
-            fontWeight: "bold",
-            cursor: "pointer",
-          }}
-          onClick={openModal}
-        >
-          Forgot Password?
-        </Typography>
+
+        {/* Links */}
+        <Box sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 1,
+        }}>
+          <Typography
+            onClick={() => setActiveTab("signup")}
+            sx={{ color: "#daa520", fontWeight: "bold", cursor: "pointer", fontSize: { xs: "0.8rem", sm: "0.875rem" }, "&:hover": { color: "#ff8c00" }, transition: "color 0.2s", textAlign: "center" }}
+          >
+            Don't have an account? Sign Up
+          </Typography>
+          <Typography
+            onClick={() => setOpenForgotModal(true)}
+            sx={{ color: "rgba(255,140,0,0.8)", fontWeight: "bold", cursor: "pointer", fontSize: { xs: "0.8rem", sm: "0.875rem" }, "&:hover": { color: "#ff8c00" }, transition: "color 0.2s", textAlign: "center" }}
+          >
+            Forgot Password?
+          </Typography>
+        </Box>
       </Box>
     </>
   );

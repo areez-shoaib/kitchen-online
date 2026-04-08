@@ -24,18 +24,14 @@ const AnimatedBox = ({ children, ...props }) => (
 export default function DealsCard() {
   return (
     <>
-      <Box
-        sx={{
+      <Box sx={{
           height: { lg: "350px", xs: "auto" },
-
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          bgcolor: "rgb(26 26 26)",
-          alignItems: "center",
-          gap: 3,
-        }}
-      >
+          display: "flex", flexDirection: "column",
+          justifyContent: "center", bgcolor: "rgb(26 26 26)",
+          alignItems: "center", gap: 3,
+          pb: { xs: 4, lg: 0 },
+          px: { xs: 0, lg: 4 },
+        }}>
         <Box
           sx={{
             display: "flex",
@@ -74,22 +70,25 @@ export default function DealsCard() {
         </Box>
         {/* ////////////////////////////////boxes */}
 
-        <Box
-          sx={{
+        <Box sx={{
             display: "flex",
             flexDirection: { lg: "row", xs: "column" },
+            justifyContent: "center",
+            alignItems: "center",
             gap: 2,
-          }}
-        >
-          <AnimatedBox
-            sx={{
-              width: { lg: "550px", xs: "95%" },
+            px: { xs: 3, sm: 4, lg: 4 },
+            width: "100%",
+            maxWidth: "100%",
+            boxSizing: "border-box",
+          }}>
+          <AnimatedBox sx={{
+              width: { lg: "550px", xs: "100%" },
               height: { lg: "190px", xs: "100%" },
               border: "2px solid rgb(225 160 25)",
               position: "relative",
               bgcolor: "rgb(35 32 26)",
-            }}
-          >
+              mt: { xs: 2, lg: 0 },
+            }}>
             <Button
               variant="contained"
               sx={{
@@ -122,7 +121,7 @@ export default function DealsCard() {
             >
               <Typography
                 sx={{
-                  fontSize: { lg: "27px", xs: "20px" },
+                  fontSize: { lg: "27px", xs: "1rem" },
                   fontWeight: "bold",
                   color: "rgb(225 160 25)",
                   fontFamily: "Times New Roman, serif",
@@ -132,7 +131,7 @@ export default function DealsCard() {
               </Typography>
               <Typography
                 sx={{
-                  fontSize: { lg: "27px", xs: "20px" },
+                  fontSize: { lg: "27px", xs: "1rem" },
                   fontWeight: "bold",
                   fontFamily: "Times New Roman, serif",
                 }}
@@ -173,16 +172,15 @@ export default function DealsCard() {
               </Button>
             </Box>
           </AnimatedBox>
-          <AnimatedBox
-            sx={{
-              width: { lg: "550px", xs: "95%" },
+          <AnimatedBox sx={{
+              width: { lg: "550px", xs: "100%" },
               height: { lg: "190px", xs: "100%" },
               border: "2px solid rgb(255 140 0)",
               position: "relative",
               borderRadius: "15px",
               bgcolor: "rgb(38 32 25)",
-            }}
-          >
+              mt: { xs: 2, lg: 0 },
+            }}>
             <Button
               variant="contained"
               sx={{
@@ -214,7 +212,7 @@ export default function DealsCard() {
             >
               <Typography
                 sx={{
-                  fontSize: { lg: "27px", xs: "20px" },
+                  fontSize: { lg: "27px", xs: "1rem" },
                   fontWeight: "bold",
                   color: "rgb(255 140 0)",
                   fontFamily: "Times New Roman, serif",
@@ -225,7 +223,7 @@ export default function DealsCard() {
 
               <Typography
                 sx={{
-                  fontSize: { lg: "27px", xs: "20px" },
+                  fontSize: { lg: "27px", xs: "1rem" },
                   fontWeight: "bold",
                   fontFamily: "Times New Roman, serif",
                 }}

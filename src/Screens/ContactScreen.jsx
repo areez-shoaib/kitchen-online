@@ -6,15 +6,7 @@ import ContactUsSection from "../Sections/ContactUsSection";
 export default function ContactScreen() {
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-
-          flexDirection: "column",
-
-          gap: 3,
-        }}
-      >
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 3, width: "100%", overflowX: "hidden" }}>
         <ContactUsSection />
         <ContactUsCard />
       </Box>

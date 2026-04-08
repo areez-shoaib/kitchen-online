@@ -28,17 +28,14 @@ const AnimatedBox = ({ children, ...props }) => (
 export default function CustomerCard() {
   return (
     <>
-      <Box
-        sx={{
+      <Box sx={{
           height: { lg: "300px", xs: "auto" },
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          bgcolor: "rgb(26 26 26)",
-          gap: 2,
-        }}
-      >
+          display: "flex", flexDirection: "column",
+          justifyContent: "center", alignItems: "center",
+          bgcolor: "rgb(26 26 26)", gap: 2,
+          pb: { xs: 4, lg: 0 },
+          px: { xs: 0, lg: 4 },
+        }}>
         <Box
           sx={{
             display: "flex",
@@ -83,21 +80,19 @@ export default function CustomerCard() {
         </Box>
         {/* ////////////////////////////////boxes */}
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { lg: "row", xs: "column" },
-            gap: 2,
-            ml: { xs: 2, lg: 0 },
-            mr: { xs: 2, lg: 0 },
-          }}
-        >
+        <Box sx={{
+            display: "flex", flexDirection: { lg: "row", xs: "column" },
+            justifyContent: "center",
+            alignItems: "center", gap: 2,
+            px: { xs: 3, sm: 4, lg: 4 },
+            width: "100%", boxSizing: "border-box",
+          }}>
           <AnimatedBox
             sx={{
               bgcolor: "rgb(15 15 15)",
               border: "2px solid rgb(61 51 26)",
-              width: { lg: "370px", xs: "auto" },
-              height: "110px",
+              width: { lg: "370px", xs: "100%" },
+              height: "auto",
               p: 2,
             }}
           >
@@ -185,8 +180,8 @@ export default function CustomerCard() {
             sx={{
               bgcolor: "rgb(15 15 15)",
               border: "2px solid rgb(61 51 26)",
-              width: { lg: "370px", xs: "auto" },
-              height: "110px",
+              width: { lg: "370px", xs: "100%" },
+              height: "auto",
               p: 2,
             }}
           >
@@ -274,8 +269,8 @@ export default function CustomerCard() {
             sx={{
               bgcolor: "rgb(15 15 15)",
               border: "2px solid rgb(61 51 26)",
-              width: { lg: "370px", xs: "auto" },
-              height: "110px",
+              width: { lg: "370px", xs: "100%" },
+              height: "auto",
               p: 2,
             }}
           >

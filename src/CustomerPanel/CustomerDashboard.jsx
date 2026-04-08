@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Divider, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip, IconButton } from "@mui/material";
+import { Box, Typography, Divider, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip, IconButton, Select, MenuItem, useMediaQuery, useTheme } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -45,6 +45,9 @@ export default function CustomerDashboard() {
     { name: "Notification", icon: <NotificationsIcon /> },
     { name: "Deal", icon: <LocalOfferIcon /> },
   ];
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  
   const [activeTab, setActiveTab] = useState("Dashboard");
   
   // Sample user data
@@ -69,17 +72,20 @@ export default function CustomerDashboard() {
   };
 
   return (
-    <Box
-      sx={{ display: "flex", flexDirection: "column", ml: 33, mt: 4, gap: 4 }}
-    >
+    <Box sx={{
+      display: "flex", flexDirection: "column",
+      ml: { xs: 0, md: 2, lg: 33 },
+      mt: { xs: 2, md: 3, lg: 4 },
+      mr: { xs: 1, md: 2, lg: 0 },
+      gap: { xs: 2, md: 3, lg: 4 },
+      px: { xs: 1, md: 2, lg: 0 },
+      boxSizing: "border-box",
+    }}>
       <Box>
-        <Typography
-          sx={{
-            fontSize: "30px",
-            fontWeight: "bold",
-            fontFamily: "New Times Roman, serif",
-          }}
-        >
+        <Typography sx={{
+            fontSize: { xs: "1.3rem", md: "1.6rem", lg: "1.9rem" },
+            fontWeight: "bold", fontFamily: "New Times Roman, serif",
+          }}>
           MY Dashboard
         </Typography>
         <Typography sx={{ color: "rgb(196, 208, 208)" }}>
@@ -87,18 +93,99 @@ export default function CustomerDashboard() {
         </Typography>
       </Box>
 
-      <Box
-        sx={{
+      <Box sx={{
           border: "1px solid rgb(65, 54, 27)",
-          width: "80%",
+          width: { xs: "100%", md: "95%", lg: "95%" },
           borderRadius: "10px",
           bgcolor: "rgb(26, 26, 26)",
           height: "auto",
           display: "flex",
           flexDirection: "column",
-        }}
-      >
-        <Box sx={{ display: "flex", gap: 3, pt: 2, ml: 2 }}>
+          boxSizing: "border-box",
+          overflowX: "hidden",
+        }}>
+        {isMobile ? (
+          <Box sx={{ px: 2, pt: 2, pb: 1 }}>
+            <Select
+              value={activeTab}
+              onChange={(e) => setActiveTab(e.target.value)}
+              fullWidth
+              size="small"
+              renderValue={(value) => {
+                const selectedTab = tabs.find(t => t.name === value);
+                return (
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Box sx={{ display: "flex", alignItems: "center", "& svg": { fontSize: "16px" } }}>
+                      {selectedTab?.icon}
+                    </Box>
+                    <Typography sx={{ fontSize: "13px", fontFamily: "Times New Roman, serif" }}>
+                      {value}
+                    </Typography>
+                  </Box>
+                );
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    bgcolor: "rgb(20,20,20)",
+                    border: "1px solid rgba(218,165,32,0.4)",
+                    "& .MuiMenuItem-root:hover": {
+                      bgcolor: "rgba(218,165,32,0.1)",
+                    },
+                    "& .Mui-selected": {
+                      bgcolor: "rgba(218,165,32,0.2) !important",
+                    }
+                  }
+                }
+              }}
+              sx={{
+                height: { xs: "36px", sm: "40px" },
+                color: "#daa520",
+                bgcolor: "rgb(20,20,20)",
+                borderRadius: "10px",
+                "& .MuiOutlinedInput-notchedOutline": { borderColor: "rgba(218,165,32,0.4)" },
+                "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#daa520" },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#daa520" },
+                "& .MuiSvgIcon-root": { color: "#daa520" },
+                "& .MuiSelect-select": {
+                  display: "flex",
+                  alignItems: "center",
+                }
+              }}
+            >
+              {tabs.map((tab) => (
+                <MenuItem 
+                  key={tab.name} 
+                  value={tab.name} 
+                  sx={{ 
+                    display: "flex", 
+                    flexDirection: "row", 
+                    gap: 1, 
+                    alignItems: "center", 
+                    color: "#daa520",
+                    minHeight: "30px",
+                    py: 0.5
+                  }}
+                >
+                  <Box sx={{ color: "#daa520", display: "flex", alignItems: "center", "& svg": { fontSize: "16px" } }}>
+                    {tab.icon}
+                  </Box>
+                  <Typography sx={{ fontSize: "13px", fontFamily: "Times New Roman, serif", color: "#daa520" }}>
+                    {tab.name}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Select>
+          </Box>
+        ) : (
+        <Box sx={{
+          display: "flex", gap: 0,
+          pt: 2,
+          width: "100%",
+          overflowX: "auto",
+          "&::-webkit-scrollbar": { height: "3px" },
+          "&::-webkit-scrollbar-thumb": { background: "rgba(218,165,32,0.4)", borderRadius: "3px" },
+        }}>
           {tabs.map((tab) => (
             <Typography
               key={tab.name}
@@ -107,19 +194,22 @@ export default function CustomerDashboard() {
                 cursor: "pointer",
                 color: activeTab === tab.name ? "#e1a11b" : "rgb(208, 208, 208)",
                 borderBottom: activeTab === tab.name ? "3px solid" : "none",
-                borderImage:
-                  activeTab === tab.name
-                    ? "linear-gradient(45deg, #e1a11b, #f89106) 1"
-                    : "none",
+                borderImage: activeTab === tab.name ? "linear-gradient(45deg, #e1a11b, #f89106) 1" : "none",
                 pb: 1,
-                width: `${100 / tabs.length}%`,
+                px: { xs: 0.5, sm: 0.8, lg: 1 },
+                minWidth: 0,
+                flex: 1,
                 textAlign: "center",
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
-                gap: 1,
-                fontSize: "13px",
+                justifyContent: "center",
+                gap: { xs: 0.3, sm: 0.5 },
+                fontSize: { xs: "8px", sm: "9px", md: "11px", lg: "12px" },
                 fontFamily: "New times roman,serif",
+                whiteSpace: "nowrap",
+                flexShrink: 1,
+                "& svg": { fontSize: { xs: "12px", sm: "14px", md: "16px" } },
               }}
             >
               {tab.icon}
@@ -127,6 +217,7 @@ export default function CustomerDashboard() {
             </Typography>
           ))}
         </Box>
+        )}
         <Divider
           sx={{
             borderColor: "#463b20",

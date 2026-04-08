@@ -1,177 +1,102 @@
 import React from "react";
+import { Box, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-import { Box, Grid, Paper, Divider, Typography, Button } from "@mui/material";
+const points = [
+  "Kitchen Online brings authentic Pakistani homemade cuisine.",
+  "Fresh meals daily using premium ingredients.",
+  "Perfect for students and professionals.",
+  "Highest hygiene standards.",
+];
 
 export default function AboutSection() {
+  const navigate = useNavigate();
   return (
-    <>
-      <Box
-        sx={{
-          height: { lg: "300px", xs: "auto" },
-          display: "flex",
-          flexDirection: "column",
+    <Box sx={{
+      bgcolor: "rgb(26,26,26)",
+      py: { xs: 4, sm: 5, md: 6 },
+      px: { xs: 2, sm: 4, md: 6, lg: 10 },
+    }}>
+      <Box sx={{ maxWidth: 700 }}>
+        {/* Badge */}
+        <Button sx={{
+          color: "#0a0a0a",
+          borderRadius: "20px",
+          background: "linear-gradient(135deg, #daa520, #ff8c00)",
+          fontWeight: "bold",
+          fontSize: { xs: "0.7rem", sm: "0.8rem" },
+          pointerEvents: "none",
+          textTransform: "none",
+          px: 2, py: 0.5, mb: 2,
+        }}>
+          About Us
+        </Button>
 
-          bgcolor: "rgb(26 26 26)",
-          gap: 2,
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            p: 3,
-            gap: 2,
-            ml: { lg: 35, xs: 1 },
-          }}
-        >
-          {" "}
-          <Box>
-            <Button
-              sx={{
-                color: "black",
-                borderRadius: "20px",
-                background:
-                  "linear-gradient(45deg, rgb(225 160 25),rgb(246 146 8))",
-                fontWeight: "bold",
-                fontSize: { xs: "12px", sm: "14px" },
-                pointerEvents: "none",
-                textTransform: "none",
-                px: { xs: 2, sm: 3, lg: 0.8 },
-                py: { xs: 0.5, sm: 0.5, lg: 0.5 },
-              }}
-            >
-              About Us
-            </Button>
-          </Box>
-          <Box>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: { lg: "30px", xs: "15px" },
-                fontWeight: "bold",
-                fontFamily: "Times New Roman, serif",
-              }}
-            >
-              Authentic{" "}
-              <Typography
-                component={"span"}
-                sx={{
-                  color: "rgb(218 165 32)",
-                  fontSize: { lg: "30px", xs: "15px" },
-                  fontWeight: "bold",
-                  fontFamily: "Times New Roman, serif",
-                  ml: 1,
-                }}
-              >
-                Pakistani Homemade{" "}
-                <Typography
-                  component={"span"}
-                  sx={{
-                    color: "white",
-                    fontSize: { lg: "30px", xs: "15px" },
+        {/* Heading */}
+        <Typography sx={{
+          color: "white",
+          fontSize: { xs: "1.2rem", sm: "1.6rem", md: "1.9rem" },
+          fontWeight: "bold",
+          fontFamily: "Times New Roman, serif",
+          mb: 2, lineHeight: 1.3,
+        }}>
+          Authentic{" "}
+          <Typography component="span" sx={{
+            color: "#daa520",
+            fontSize: "inherit", fontWeight: "inherit", fontFamily: "inherit",
+          }}>
+            Pakistani Homemade{" "}
+          </Typography>
+          Food
+        </Typography>
 
-                    fontWeight: "bold",
-                    fontFamily: "Times New Roman, serif",
-                  }}
-                >
-                  Food
-                </Typography>
-              </Typography>
+        {/* Points */}
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 0.8, mb: 3 }}>
+          {points.map((p, i) => (
+            <Typography key={i} sx={{
+              color: "rgba(208,208,208,0.85)",
+              fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem" },
+              display: "flex", alignItems: "flex-start", gap: 1,
+            }}>
+              <span style={{ color: "#daa520", flexShrink: 0 }}>✓</span> {p}
             </Typography>
-            <Box>
-              <Typography>
-                ✓ Kitchen Online brings authentic Pakistani homemade cuisine.
-              </Typography>
-              <Typography>
-                ✓ Fresh meals daily using premium ingredients.
-              </Typography>
-              <Typography>✓ Perfect for students and professionals.</Typography>
-              <Typography>✓ Highest hygiene standards.</Typography>
-            </Box>
-          </Box>
-          <Box
+          ))}
+        </Box>
+
+        {/* Buttons */}
+        <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+          <Button
+            onClick={() => navigate("/MenuScreen")}
+            variant="contained"
             sx={{
-              display: "flex",
-              gap: 2,
+              bgcolor: "#f49408", color: "black", fontWeight: "bold",
+              borderRadius: "8px", textTransform: "none",
+              fontSize: { xs: "0.8rem", sm: "0.9rem" },
+              px: { xs: 2.5, sm: 3 }, py: { xs: 0.7, sm: 1 },
+              boxShadow: "0 4px 15px rgba(218,165,32,0.4)",
+              transition: "all 0.3s ease",
+              "&:hover": { transform: "translateY(-2px)", boxShadow: "0 6px 20px rgba(218,165,32,0.6)" },
+              "&:focus": { outline: "none" },
             }}
           >
-            <Button
-              variant="contained"
-              sx={{
-                bgcolor: "rgb(244 148 10)",
-                color: "black",
-                fontWeight: "bold",
-                borderRadius: "7px",
-                py: { lg: 1, xs: 0.3 },
-
-                fontSize: { lg: "15px", xs: "10px" },
-                outline: "none",
-                "&:focus": {
-                  outline: "none",
-                },
-                "&:active": {
-                  outline: "none",
-                },
-                animation: "glow 2s infinite alternate",
-                "@keyframes glow": {
-                  "0%": {
-                    boxShadow: "0 0 5px rgba(255, 193, 7, 0.3)",
-                  },
-                  "50%": {
-                    transform: "translateY(0px)",
-                    boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
-                  },
-                  "100%": {
-                    boxShadow: "0 0 20px rgba(255, 193, 7, 0.8)",
-                  },
-                },
-              }}
-            >
-              Explore Menu
-            </Button>
-
-            <Button
-              disableRipple
-              disableFocusRipple
-              sx={{
-                color: "rgb(218 165 32)",
-                border: "1px solid rgb(244 148 10)",
-                borderRadius: "7px",
-                fontSize: { lg: "15px", xs: "10px" },
-                px: { lg: 3, xs: 1 },
-                outline: "none",
-                animation: "glow 2s infinite alternate",
-                "&:hover": {
-                  backgroundColor: "rgba(7, 5, 0, 0.97)", // blue remove
-                  border: "1px solid rgb(244 148 10)",
-                },
-                "&:focus": {
-                  outline: "none",
-                },
-                "&:active": {
-                  outline: "none",
-                },
-
-                "@keyframes glow": {
-                  "0%": {
-                    boxShadow: "0 0 5px rgba(255, 193, 7, 0.3)",
-                  },
-                  "50%": {
-                    transform: "translateY(0px)",
-                    boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
-                  },
-                  "100%": {
-                    boxShadow: "0 0 20px rgba(255, 193, 7, 0.8)",
-                  },
-                },
-              }}
-            >
-              Contact Us
-            </Button>
-          </Box>
+            Explore Menu
+          </Button>
+          <Button
+            onClick={() => navigate("/ContactScreen")}
+            sx={{
+              color: "#daa520", border: "1px solid rgba(218,165,32,0.5)",
+              borderRadius: "8px", textTransform: "none",
+              fontSize: { xs: "0.8rem", sm: "0.9rem" },
+              px: { xs: 2.5, sm: 3 }, py: { xs: 0.7, sm: 1 },
+              transition: "all 0.3s ease",
+              "&:hover": { bgcolor: "rgba(218,165,32,0.08)", borderColor: "#daa520" },
+              "&:focus": { outline: "none" },
+            }}
+          >
+            Contact Us
+          </Button>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 }

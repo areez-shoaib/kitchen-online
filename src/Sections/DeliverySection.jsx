@@ -40,13 +40,10 @@ export default function DeliverySection() {
     <Box
       sx={{
         minHeight: "400px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        bgcolor: "rgb(26 26 26)",
-        gap: 4,
-        px: 2,
+        display: "flex", flexDirection: "column",
+        justifyContent: "center", alignItems: "center",
+        bgcolor: "rgb(26 26 26)", gap: 4,
+        px: 2, pb: { xs: 4, lg: 0 },
       }}
     >
       {/* Heading */}
@@ -102,7 +99,7 @@ export default function DeliverySection() {
           <AnimatedBox
             key={index}
             sx={{
-              width: "110%",
+              width: "100%",
               height: "40px",
 
               bgcolor: "rgb(15 15 15)",

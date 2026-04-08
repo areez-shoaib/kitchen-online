@@ -15,6 +15,7 @@ import TopBar from "./Components/TopBar";
 import Footer from "../src/Components/Footer";
 import { Box, Divider } from "@mui/material";
 import { AuthProvider } from "./Context/AuthContext";
+import { CartProvider } from "./Context/CartContext";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -30,7 +31,9 @@ function Layout({ children }) {
       sx={{
         backgroundColor: "rgb(15 15 15)",
         color: "white",
-        width: "100vw",
+        width: "100%",
+        maxWidth: "100vw",
+        overflowX: "hidden",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -56,23 +59,25 @@ function Layout({ children }) {
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<SplashScreen />} />
-            <Route path="/SplashScreen" element={<SplashScreen />} />
-            <Route path="/HomeScreen" element={<HomeScreen />} />
-            <Route path="/MenuScreen" element={<MenuScreen />} />
-            <Route path="/ContactScreen" element={<ContactScreen />} />
-            <Route path="/DeliveryScreen" element={<DeliveryScreen />} />
-            <Route path="/UserLogin" element={<UserLogin />} />
-            <Route path="/PromoCodeScreen" element={<PromoCodeScreen />} />
-            <Route path="/CustomerDashboard" element={<CustomerDashboard />} />
-            <Route path="/PromocodeCustomer" element={<PromocodeCustomer />} />
-            <Route path="/AdminDashboard" element={<AdminDashboard />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<SplashScreen />} />
+              <Route path="/SplashScreen" element={<SplashScreen />} />
+              <Route path="/HomeScreen" element={<HomeScreen />} />
+              <Route path="/MenuScreen" element={<MenuScreen />} />
+              <Route path="/ContactScreen" element={<ContactScreen />} />
+              <Route path="/DeliveryScreen" element={<DeliveryScreen />} />
+              <Route path="/UserLogin" element={<UserLogin />} />
+              <Route path="/PromoCodeScreen" element={<PromoCodeScreen />} />
+              <Route path="/CustomerDashboard" element={<CustomerDashboard />} />
+              <Route path="/PromocodeCustomer" element={<PromocodeCustomer />} />
+              <Route path="/AdminDashboard" element={<AdminDashboard />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </CartProvider>
     </AuthProvider>
   );
 }

@@ -29,16 +29,12 @@ const AnimatedBox = ({ children, ...props }) => (
 export default function TrustCard() {
   return (
     <>
-      <Box
-        sx={{
+      <Box sx={{
           height: { lg: "400px", xs: "auto" },
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 2,
-        }}
-      >
+          display: "flex", flexDirection: "column",
+          justifyContent: "center", alignItems: "center",
+          gap: 2, pb: { xs: 4, lg: 0 },
+        }}>
         <Box
           sx={{
             display: "flex",
@@ -82,13 +78,11 @@ export default function TrustCard() {
         </Box>
         {/* ////////////////////////////////boxes */}
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { lg: "row", xs: "column" },
-            gap: 2,
-          }}
-        >
+        <Box sx={{
+            display: "flex", flexDirection: { lg: "row", xs: "column" },
+            alignItems: "center", gap: 2,
+            px: { xs: 2, lg: 0 }, width: { xs: "100%", lg: "auto" },
+          }}>
           <AnimatedBox>
             <Box
               sx={{

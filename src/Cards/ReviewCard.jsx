@@ -30,16 +30,13 @@ const AnimatedBox = ({ children, ...props }) => (
 export default function ReviewCard() {
   return (
     <>
-      <Box
-        sx={{
+      <Box sx={{
           height: { lg: "500px", xs: "auto" },
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 2,
-        }}
-      >
+          display: "flex", flexDirection: "column",
+          justifyContent: "center", alignItems: "center",
+          gap: 2, pb: { xs: 4, lg: 0 },
+          px: { xs: 2, lg: 0 },
+        }}>
         <Box
           sx={{
             display: "flex",

@@ -134,7 +134,7 @@ export default function BottomSection() {
           </Button>
         </Box>
 
-        <Box sx={{ display: "flex", gap: 2 }}>
+        <Box sx={{ display: "flex", gap: { xs: 3, sm: 4 }, justifyContent: "center", alignItems: "center" }}>
           <Box
             sx={{
               display: "flex",

@@ -23,7 +23,7 @@ const AnimatedBox = ({ children, ...props }) => (
 export default function WorthyCard() {
   return (
     <>
-      <AnimatedBox sx={{ width: "70%", p: 3, height: "auto" }}>
+      <AnimatedBox sx={{ width: { xs: "92%", sm: "85%", lg: "70%" }, p: { xs: 2, sm: 3 }, height: "auto", boxSizing: "border-box" }}>
         <Typography
           sx={{
             color: "rgb(208 208 208)",
